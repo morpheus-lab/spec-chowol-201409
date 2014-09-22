@@ -16,7 +16,7 @@ public class EchoClient {
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		
 		// 서버에 연결하는 소켓 생성
-		Socket sock = new Socket("127.0.0.1", 10001);
+		Socket sock = new Socket("192.168.0.105", 10001);
 		
 		// 소켓에서 in 꺼내고
 		InputStream in = sock.getInputStream();
