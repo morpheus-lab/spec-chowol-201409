@@ -44,19 +44,9 @@ public class ChattingClient extends Thread {
 	}
 	
 	public void close() {
-		// in/out stream 정리
-		try {
-			sockReader.close();
-		} catch (IOException e) {}
-		try {
-			sockWriter.close();
-		} catch (IOException e) {}
-		try {
-			kbReader.close();
-		} catch (IOException e) {}
-		
 		// Socket 닫기
 		try {
+			System.out.println("Closing socket");
 			sock.close();
 		} catch (IOException e) {}
 	}
@@ -65,6 +55,7 @@ public class ChattingClient extends Thread {
 			IOException {
 		
 		ChattingClient client = new ChattingClient();
+		client.start();
 		
 		// 본인의 아이디를 서버에 전송
 		System.out.print("ID: ");
@@ -86,6 +77,8 @@ public class ChattingClient extends Thread {
 			// 소켓으로 문자열 쓰기
 			client.sendMessage(line);
 		}
+		
+		System.out.println("while 문 빠져나옴");
 		
 		client.close();
 		

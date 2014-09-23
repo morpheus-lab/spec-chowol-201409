@@ -19,9 +19,11 @@ public class ChattingThread extends Thread {
 	private Socket socket;
 	private BufferedReader reader;
 	private BufferedWriter writer;
+	private ChattingServer server;
 	
 	// 생성자
-	public ChattingThread(Socket socket) {
+	public ChattingThread(ChattingServer server, Socket socket) {
+		this.server = server;
 		this.socket = socket;
 		init();
 	}
@@ -68,19 +70,18 @@ public class ChattingThread extends Thread {
 		
 		try {
 			String id = reader.readLine();
-			// 화면에 접속 알림 출력
-			System.out.println(id + "님이 접속하였습니다.");
+			// 모든 클라이언트에 접속 알림 전송
+			server.sendMessageToAll(id + "님이 접속하였습니다.");
 			
-			// 클라이언트가 보내는 문자열을 읽어서 화면에 출력
+			// 클라이언트가 보내는 문자열을 읽어서 모든 클라이언트에 전송
 			while ((line = reader.readLine()) != null) {
 				if (line.equals("/quit")) {
 					// 접속 종료 처리
-					
+					server.sendMessageToAll(id + "님이 접속을 종료하였습니다.");
 					break;
 				}
 				// 일반 대화문으로 처리
-				
-				System.out.println(id + "님의 말: " + line);
+				server.sendMessageToAll(id + ": " + line);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

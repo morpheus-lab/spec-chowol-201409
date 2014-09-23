@@ -51,14 +51,23 @@ public class ChattingServer {
 	 * @param message 전송할 메시지
 	 */
 	public void sendMessageToAll(String message) {
-		for (int i = 0; i < connections.size(); i++) {
-			// ChattingThread의 sendMessage 메서드를 통해 메시지 전송
-			ChattingThread conn = connections.get(i);
-			try {
-				conn.sendMessage(message);
-			} catch (IOException e) {
-				e.printStackTrace();
+		synchronized (connections) {
+			for (int i = 0; i < connections.size(); i++) {
+				// ChattingThread의 sendMessage 메서드를 통해 메시지 전송
+				ChattingThread conn = connections.get(i);
+				try {
+					conn.sendMessage(message);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
+		}
+	}
+	
+	// 접속 종료 처리
+	public void disconnect(ChattingThread conn) {
+		synchronized (connections) {
+			connections.remove(conn);
 		}
 	}
 	
@@ -69,9 +78,11 @@ public class ChattingServer {
 			// 채팅 클라이언트로부터 연결을 수립하고 Socket 인스턴스를 얻어와서,
 			Socket sock = server.ss.accept();
 			// 위 Socket 인스턴스로 ChattingThread 인스턴스를 만들고
-			ChattingThread connection = new ChattingThread(sock);
+			ChattingThread connection = new ChattingThread(server, sock);
 			// ChattingThread 목록 (connections)에 추가
-			server.connections.add(connection);
+			synchronized (server.connections) {
+				server.connections.add(connection);
+			}
 			// ChattingThread 쓰레드 실행
 			connection.start();
 		}
