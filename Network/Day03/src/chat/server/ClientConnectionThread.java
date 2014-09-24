@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
 
 public class ClientConnectionThread extends Thread {
 	
@@ -48,28 +47,43 @@ public class ClientConnectionThread extends Thread {
 				// 접속 종료 처리
 				if (line.equals("/exit")) {
 					break;
-//					synchronized (ChatServer.clients) {
-						// 다른 클라이언트들에게 종료 메시지 송신
-//						ArrayList<ClientConnectionThread> list = ChatServer.clients;
-//						for (int i = 0; i < list.size(); i++) {
-//							ClientConnectionThread client = list.get(i);
-//							client.sendMessage(id + "님이 접속을 종료하였습니다.");
-//						}
-						// 서버의 클라이언트 목록으로 부터 이 클라이언트 삭제
-//						ChatServer.clients.remove(this);
-//					}
+				}
+				else if (line.startsWith("/to ")) { // "/to"로 시작하는 메시지
+					String[] wMessage = line.split(" ", 3);	// "/to java hello, java~"
+															// {"/to","java","hello, java~"}
+					// 메시지가 syntax에 적합한지 체크
+					if (wMessage.length == 3) {
+						// 대상 클라이언트
+						ClientConnectionThread targetClient = null;
+						// 대상 아이디
+						String targetId = wMessage[1];
+						// 대상 아이디가 존재하는지 체크
+						synchronized (ChatServer.clients) {
+							for (int i = 0; i < ChatServer.clients.size(); i++) {
+								// ChatServer의 클라이언트 목록의 i번째 클라이언트
+								ClientConnectionThread client = ChatServer.clients.get(i);
+								// i번째 클라이언트의 id 속성값이 targetId 값과 같으면
+								if (client.id.equals(targetId)) {
+									// 메시지를 보낼 대상 클라이언트로 임시 저장
+									targetClient = client;
+									// for 반복문을 빠져나감
+									break;
+								}
+							}
+						}
+						// 보낼 메시지
+						String message = wMessage[2];
+						// 메시지 전송
+						// 대상 아이디를 갖는 클라이언트가 있다면
+						if (targetClient != null) {
+							// 대상 클라이언트를 통해 메시지를 전송
+							targetClient.sendMessage(id + "님의 귓속말: " + message);
+						}
+					}
 				}
 				// 일반 메시지 처리
 				else {
 					ChatServer.sendMessageToAll(id + "님의 메시지: " + line);
-//					synchronized (ChatServer.clients) {
-//						// 이 클라이언트를 포함한, 모든 클라이언트에게 메시지 송신
-//						ArrayList<ClientConnectionThread> list = ChatServer.clients;
-//						for (int i = 0; i < list.size(); i++) {
-//							ClientConnectionThread client = list.get(i);
-//							client.sendMessage(id + "님의 메시지: " + line);
-//						}
-//					}
 				}
 			}
 			
