@@ -10,6 +10,22 @@ public class ChatServer {
 	static ArrayList<ClientConnectionThread> clients
 		= new ArrayList<ClientConnectionThread>();
 	
+	// 모든 클라이언트에게 메시지를 보내는 메서드
+	public static void sendMessageToAll(String message) {
+		synchronized (clients) {
+			for (int i = 0; i < clients.size(); i++) {
+				clients.get(i).sendMessage(message);
+			}
+		}
+	}
+	
+	// 클라이언트 목록으로부터 클라이언트 삭제
+	public static void removeClient(ClientConnectionThread client) {
+		synchronized (clients) {
+			clients.remove(client);
+		}
+	}
+	
 	public static void main(String[] args) throws IOException {
 		
 		// 서버 소켓 생성

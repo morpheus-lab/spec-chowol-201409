@@ -57,6 +57,8 @@ public class ChatClient {
 			
 			// 반복문 종료 조건
 			if (message.equals("/exit")) {
+				writer.write(message + "\n");
+				writer.flush();
 				break;
 			}
 			
