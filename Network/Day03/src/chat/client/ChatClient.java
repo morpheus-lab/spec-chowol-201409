@@ -21,7 +21,7 @@ public class ChatClient {
 		// 이 쓰레드가 별도로 동작하면서 할 일
 		public void run() {
 			while (true) {
-				System.out.println("받은 메시지: " + scanner.nextLine());
+				System.out.println(scanner.nextLine());
 			}
 		}
 		
@@ -40,13 +40,19 @@ public class ChatClient {
 		// 키보드 입력 받을 수 있는 Scanner 객체 생성
 		Scanner scanner = new Scanner(System.in);
 		
+		// 아이디 입력
+		System.out.print("아이디 입력: ");
+		String id = scanner.nextLine();
+		writer.write(id + "\n");
+		writer.flush();
+		
 		// 메시지 읽는 쓰레드 생성 및 시작
 		ClientChatThread t = new ClientChatThread(reader);
 		t.start();
 		
 		while (true) {
 			// 키보드로부터 서버에 보낼 메시지 입력 받음
-			System.out.print("보낼 메시지: ");
+//			System.out.print("보낼 메시지: ");
 			String message = scanner.nextLine();
 			
 			// 반복문 종료 조건

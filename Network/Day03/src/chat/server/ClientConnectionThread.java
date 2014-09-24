@@ -15,6 +15,8 @@ public class ClientConnectionThread extends Thread {
 	PrintWriter writer;
 	// 위 소켓을 통해 메시지를 받을 수 있는 Reader
 	BufferedReader reader;
+	// 이 클라이언트의 아이디
+	String id;
 	
 	// 생성자
 	public ClientConnectionThread(Socket socket) throws IOException {
@@ -33,33 +35,32 @@ public class ClientConnectionThread extends Thread {
 	// 이 쓰레드가 할 일
 	public void run() {
 		
-		String line = null;
-		
-		while (true) {
-			try {
-				// 클라이언트로부터 메시지를 수신
-				line = reader.readLine();
-				
-				synchronized (ChatServer.clients) {
-					// 이 클라이언트를 포함한, 모든 클라이언트에게 메시지 송신
-					ArrayList<ClientConnectionThread> list = ChatServer.clients;
-					
-					for (int i = 0; i < list.size(); i++) {
-						ClientConnectionThread client = list.get(i);
-						client.sendMessage(line);
-					}
-				}
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-				break;
-			}
-		}
-		
 		try {
-			socket.close();
-		} catch (IOException e) {}
-		
+			// 첫 메시지를 아이디로 처리
+			id = reader.readLine();
+			
+			String line = null;
+			while (true) {
+					// 클라이언트로부터 메시지를 수신
+					line = reader.readLine();
+					synchronized (ChatServer.clients) {
+						// 이 클라이언트를 포함한, 모든 클라이언트에게 메시지 송신
+						ArrayList<ClientConnectionThread> list = ChatServer.clients;
+						
+						for (int i = 0; i < list.size(); i++) {
+							ClientConnectionThread client = list.get(i);
+							client.sendMessage(id + "님의 메시지: " + line);
+						}
+					}
+			}
+		} catch (IOException e) {
+//			e.printStackTrace();
+			System.out.println("클라이언트와의 연결이 종료되었습니다.");
+		} finally {
+			try {
+				socket.close();
+			} catch (IOException e) {}
+		}
 	}
 	
 }
