@@ -7,7 +7,30 @@ import java.util.ArrayList;
 
 public class ChatServer {
 	
+	// 접속한 클라이언트 목록
 	static ArrayList<ChatServerThread> CLIENTS = new ArrayList<ChatServerThread>();
+	
+	// 개설된 채팅방 목록
+	static ArrayList<ChatChannel> CHANNELS = new ArrayList<ChatChannel>();
+	
+	// 전체 채팅방 목록 조회
+	public static String getAllChannelInfos() {
+		String info = "";
+		
+		synchronized (CHANNELS) {
+			
+			for (int i = 0; i < CHANNELS.size(); i++) {
+				
+				ChatChannel channel = CHANNELS.get(i);
+				
+				info += channel.getInfo() + "\n";
+				
+			}
+			
+		}
+		
+		return info;
+	}
 	
 	public static void main(String[] args) throws IOException {
 		
