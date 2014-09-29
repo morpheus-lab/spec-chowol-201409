@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SELECT 태그 처리</title>
+</head>
+<body>
+
+<form action="form4.jsp" method="post">
+	
+	<table border="1">
+		
+		<tr>
+			<td>면류</td>
+			<td>
+				<select name="noodle">
+					<option selected="selected">나가사키 짬뽕</option>
+					<option>꼬꼬면</option>
+					<option>기스면</option>
+					<option>신라면</option>
+					<option>안성탕면</option>
+				</select>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>빵류</td>
+			<td>
+				<select name="bread" size="3">
+					<option selected="selected">몽쉘</option>
+					<option>가나파이</option>
+					<option>초코파이</option>
+				</select>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>게임</td>
+			<td>
+				<select name="game" multiple="multiple">
+					<option>디아블로3</option>
+					<option selected="selected">LOL</option>
+					<option selected="selected">스타2</option>
+					<option>블소</option>
+				</select>
+			</td>
+		</tr>
+		
+	</table>
+	
+	<input type="submit" value="전송" />
+	<input type="reset" value="초기화" />
+	
+</form>
+
+</body>
+</html>

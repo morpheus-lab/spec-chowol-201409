@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>파일 업로드</title>
+</head>
+<body>
+
+인코딩방식: application/x-www-form-urlencoded (기본)
+<form action="form5.jsp" method="post">
+	이름: <input type="text" name="name" /><br/>
+	주소: <input type="text" name="addr" /><br/>
+	파일: <input type="file" name="file" /><br/>
+	<input type="submit" value="전송" />
+</form>
+
+인코딩방식: multipart/form-data
+<form action="form5.jsp" method="post" enctype="multipart/form-data">
+	이름: <input type="text" name="name" /><br/>
+	주소: <input type="text" name="addr" /><br/>
+	파일: <input type="file" name="file" /><br/>
+	<input type="submit" value="전송" />
+</form>
+
+</body>
+</html>
