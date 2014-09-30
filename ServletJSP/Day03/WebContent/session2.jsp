@@ -4,6 +4,15 @@
 <!DOCTYPE html>
 <html>
 <body>
+<%!
+	public void jspInit() {
+		System.out.println("session2.jsp jspInit() 호출됨");
+	}
+
+	public void jspDestroy() {
+		System.out.println("session2.jsp jspDestroy() 호출됨");
+	}
+%>
 <%
 if( session.isNew() ) {
 	out.println("NEW <br/>");
