@@ -9,7 +9,7 @@
 <% out.flush(); %>
 4. flush 후 남아있는 버퍼크기 : <%= out.getRemaining() %> <br/>
 5. out.print를 통한 출력 : <% out.print("print"); %> <br/>
-<% out.clear(); %>
+<% //out.clear(); %>
 6. clear 후 남아있는 버퍼크기 : <%= out.getRemaining() %> <br/>
 <% out.close(); %>
 7. close 후 남아있는 버퍼크기 : <%= out.getRemaining() %> <br/>
