@@ -11,9 +11,12 @@
 
 <jsp:useBean id="user" class="bean.User" scope="request" />
 
+<jsp:setProperty name="user" property="id" value="admin" />
+<jsp:setProperty name="user" property="name" value="시비르" />
+
 <%
-user.setId("admin");
-user.setName("시비르");
+//user.setId("admin");
+//user.setName("시비르");
 user.setPw("1111");
 user.setEmail("admin@localhost");
 user.setRegDate(new Date());
