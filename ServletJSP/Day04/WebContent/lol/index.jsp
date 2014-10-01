@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+String target = request.getParameter("target") + ".jsp";
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,8 +20,7 @@
 				<jsp:include page="include/menu.jsp" flush="false" />
 			</td>
 			<td width="80%" valign="middle">
-				챔피언을 선택하십시오.<br/>
-				<img src="images/champ.png" width="200" border="0" />
+				<jsp:include page="<%= target %>" flush="false" />
 			</td>
 		</tr>
 		<tr>

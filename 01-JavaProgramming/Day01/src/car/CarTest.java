@@ -4,22 +4,22 @@ public class CarTest {
 
 	public static void main(String[] args) {
 		
-		// 3 x 2 ÀÌÂ÷¿ø¹è¿­
+		// 3 x 2 ì´ì°¨ì›ë°°ì—´
 		Car[][] cars = new Car[3][2];
 		
 		cars[0][0] = new Car();
-		cars[0][1] = new Car("»¡°£»ö", "2000cc");
+		cars[0][1] = new Car("ë¹¨ê°„ìƒ‰", "2000cc");
 		
-		cars[1][0] = new Car("°ËÀº»ö", "1000cc");
-		cars[1][1] = new Car("ÀºÈ¸»ö", "3800cc");
+		cars[1][0] = new Car("ê²€ì€ìƒ‰", "1000cc");
+		cars[1][1] = new Car("ì€íšŒìƒ‰", "3800cc");
 		
-		cars[2][0] = new Car("ÁøÈ¸»ö", "1600cc");
+		cars[2][0] = new Car("ì§„íšŒìƒ‰", "1600cc");
 		
-		System.out.println("[i][j] »ö  »ó, µî  ±Ş");
+		System.out.println("[i][j] ìƒ‰  ìƒ, ë“±  ê¸‰");
 		System.out.println("=====================");
-		// iÇà
+		// ií–‰
 		for (int i = 0; i < cars.length; i++) {
-			// j¿­
+			// jì—´
 			for (int j = 0; j < cars[i].length; j++) {
 				System.out.print("[" + i + "]");
 				System.out.print("[" + j + "] ");

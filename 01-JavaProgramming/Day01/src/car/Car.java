@@ -6,7 +6,7 @@ public class Car {
 	String grade;
 	
 	public Car() {
-		this("¸ô¶ó¿ä", "¸ô¶ó¿ä");
+		this("ëª°ë¼ìš”", "ëª°ë¼ìš”");
 	}
 	
 	public Car(String c, String g) {
