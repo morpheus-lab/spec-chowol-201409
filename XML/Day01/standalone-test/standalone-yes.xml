@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!DOCTYPE booklist [
+    <!ELEMENT booklist (book*)>
+    
+    <!ELEMENT book (title, author, publisher)>
+    
+    <!ELEMENT title (#PCDATA)>
+    <!ELEMENT author (#PCDATA)>
+    <!ELEMENT publisher (#PCDATA)>
+]>
+
+<booklist>
+    <book>
+        <title>Java 개발자를 위한 XML</title>
+        <author>이치행</author>
+        <publisher>비트스쿨</publisher>
+    </book>
+    <book>
+        <title>.NET 개발자를 위한 XML</title>
+        <author>전동길</author>
+        <publisher>비트스쿨</publisher>
+    </book>
+</booklist>

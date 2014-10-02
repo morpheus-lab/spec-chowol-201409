@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<!DOCTYPE booklist SYSTEM "booklist.dtd">
+
+<booklist>
+    <book kind="IT">
+        <title>Java 개발자를 위한 XML</title>
+        <author>
+            <name>이치행</name>
+        </author>
+        <publisher>비트스쿨</publisher>
+    </book>
+    <book kind="IT">
+        <title>.NET 개발자를 위한 XML</title>
+        <author>
+            <name>전동길</name>
+        </author>
+        <publisher>비트스쿨</publisher>
+    </book>
+</booklist>

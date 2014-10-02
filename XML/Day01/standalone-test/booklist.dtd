@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 엘리먼트 선언 -->
+<!ELEMENT booklist (book*) >
+<!ELEMENT book (title, author, publisher, price?) >
+<!ELEMENT title (#PCDATA) >
+<!ELEMENT author (name, tel?, address?) >
+<!ELEMENT publisher (#PCDATA) >
+<!ELEMENT price (#PCDATA) >
+
+<!ELEMENT name (#PCDATA) >
+<!ELEMENT tel (#PCDATA) >
+<!ELEMENT address (#PCDATA) >
+
+<!-- 어트리뷰트 (속성) 선언 -->
+<!ATTLIST book
+    kind CDATA #REQUIRED
+>
