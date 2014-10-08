@@ -5,16 +5,16 @@ public class DogTest {
 		
 		Dog dog = new Dog();
 		
-		System.out.println("ÀÌ¸§: " + dog.name);
+		System.out.println("ì´ë¦„: " + dog.name);
 		
-		dog.name = "¹é±¸";
-		dog.type = "Áøµ¾°³";
-		dog.color = "Èò»ö";
+		dog.name = "ë°±êµ¬";
+		dog.type = "ì§„ë—ê°œ";
+		dog.color = "í°ìƒ‰";
 		
-		System.out.println("ÀÌ¸§: " + dog.name);
-		System.out.println("Ç°Á¾: " + dog.type);
-		System.out.println("´Ù¸®: "
-				+ dog.numberOfLegs + " °³");
+		System.out.println("ì´ë¦„: " + dog.name);
+		System.out.println("í’ˆì¢…: " + dog.type);
+		System.out.println("ë‹¤ë¦¬: "
+				+ dog.numberOfLegs + " ê°œ");
 		
 		dog.bark();
 		

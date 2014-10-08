@@ -1,8 +1,8 @@
 
 public class A {
 
-	int i;	// ÀÎ½ºÅÏ½º º¯¼ö
-	static int si; // static º¯¼ö
+	int i;	// ì¸ìŠ¤í„´ìŠ¤ ë³€ìˆ˜
+	static int si; // static ë³€ìˆ˜
 	
 	public void A() {}
 	

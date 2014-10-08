@@ -3,7 +3,7 @@ public class EmployeeUser {
 
 	public static void main(String[] args) {
 		Employee e1 = new Employee();
-//		Employee e2 = new Employee("ȫ�浿", "101", "��ȹ");
+//		Employee e2 = new Employee("홍길동", "101", "기획");
 		
 		System.out.println("e1 = ");
 		e1.print();

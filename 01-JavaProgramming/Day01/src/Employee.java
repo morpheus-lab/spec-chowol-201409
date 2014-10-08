@@ -6,14 +6,14 @@ public class Employee {
 	String dept;
 	
 	public Employee() {
-//		name = "ÀÌ¸§¾øÀ½"; no = "ÀÓ½Ã»ç¹ø"; dept = "ÀÓ½ÃºÎ¼­";
-		this("ÀÌ¸§¾øÀ½", "ÀÓ½Ã»ç¹ø", "ÀÓ½ÃºÎ¼­");
-		System.out.println("ÀÎÀÚ¾ø´Â »ı¼ºÀÚ È£ÃâµÊ!!!");
+//		name = "ì´ë¦„ì—†ìŒ"; no = "ì„ì‹œì‚¬ë²ˆ"; dept = "ì„ì‹œë¶€ì„œ";
+		this("ì´ë¦„ì—†ìŒ", "ì„ì‹œì‚¬ë²ˆ", "ì„ì‹œë¶€ì„œ");
+		System.out.println("ì¸ìì—†ëŠ” ìƒì„±ì í˜¸ì¶œë¨!!!");
 	}
 	
 	public Employee(String na, String n, String d) {
 		name = na; no = n; dept = d;
-		System.out.println("ÀÎÀÚÀÖ´Â »ı¼ºÀÚ È£ÃâµÊ!!!");
+		System.out.println("ì¸ììˆëŠ” ìƒì„±ì í˜¸ì¶œë¨!!!");
 	}
 	
 	public void print() {

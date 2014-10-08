@@ -1,22 +1,22 @@
 
 public class Dog {
 
-	// ¸â¹ö º¯¼ö
-	// ÇÊµå (fields)
+	// ë©¤ë²„ ë³€ìˆ˜
+	// í•„ë“œ (fields)
 	String name;
 	String color;
 	String type;
 	static int numberOfLegs;
 	
-	// »ı¼ºÀÚ
+	// ìƒì„±ì
 	public Dog() {
-//		System.out.println("´Ù¸®´Â 4°³");
+//		System.out.println("ë‹¤ë¦¬ëŠ” 4ê°œ");
 		numberOfLegs = 4;
 	}
 	
-	// ¸Ş¼Òµå
+	// ë©”ì†Œë“œ
 	public void bark() {
-		System.out.println("¸Û¸Û!");
+		System.out.println("ë©ë©!");
 	}
 	
 	

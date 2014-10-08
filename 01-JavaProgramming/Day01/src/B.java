@@ -9,33 +9,33 @@ public class B {
 //		this(null);
 //		this(null, null);
 		this(null, null, null);
-		System.out.println("ÀÎÀÚ ¾ø´Â »ı¼ºÀÚ");
+		System.out.println("ì¸ì ì—†ëŠ” ìƒì„±ì");
 	}
 	
 	public B(String n) {
 //		name = n;
 //		this(n, null);
 		this(n, null, null);
-		System.out.println("ÀÎÀÚ 1°³Â¥¸® »ı¼ºÀÚ");
+		System.out.println("ì¸ì 1ê°œì§œë¦¬ ìƒì„±ì");
 	}
 	
 	public B(String n, String a) {
 //		name = n; age = a;
 		this(n, a, null);
-		System.out.println("ÀÎÀÚ 2°³Â¥¸® »ı¼ºÀÚ");
+		System.out.println("ì¸ì 2ê°œì§œë¦¬ ìƒì„±ì");
 	}
 	
 	public B(String n, String a, String addr) {
 		name = n; age = a; address = addr;
-		System.out.println("ÀÎÀÚ 3°³Â¥¸® »ı¼ºÀÚ");
+		System.out.println("ì¸ì 3ê°œì§œë¦¬ ìƒì„±ì");
 	}
 
 	public static void main(String[] args) {
 		B b0, b1, b2, b3;
 //		b0 = new B();
-		b1 = new B("È«±æµ¿");
-//		b2 = new B("°í±æµ¿", "53");
-//		b3 = new B("µÑ¸®", "11", "½Ö¹®µ¿");
+		b1 = new B("í™ê¸¸ë™");
+//		b2 = new B("ê³ ê¸¸ë™", "53");
+//		b3 = new B("ë‘˜ë¦¬", "11", "ìŒë¬¸ë™");
 	}
 	
 }
