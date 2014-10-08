@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-stylesheet type="text/xsl" href="booklist.xsl"?>
+<!--
+<!DOCTYPE booklist SYSTEM "booklist.dtd">
+<booklist>
+-->
+<booklist
+    xmlns="http://www.bitacademy.com/schema/booklist"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.bitacademy.com/schema/booklist booklist.xsd">
+
+    <book category="수필"><!-- "소설","수필","IT" -->
+        <title>멈추면, 비로소 보이는 것들</title>
+        <author>혜민</author>
+        <isbn>9788965700609</isbn><!-- ISBN-13 -->
+        <price>14000</price><!-- 1000 ~ -->
+        <stock>999</stock><!-- 재고량, 0 ~ -->
+    </book>
+    
+    <book category="소설">
+        <title>안녕, 형아</title>
+        <author></author>
+        <isbn>1234567890123</isbn>
+        <price>1000</price>
+        <stock>0</stock>
+    </book>
+    
+    <book category="소설">
+        <title>안녕, 누나</title>
+        <author></author>
+        <isbn>1234567890122</isbn>
+        <price>1000</price>
+        <stock>0</stock>
+    </book>
+    
+</booklist>
