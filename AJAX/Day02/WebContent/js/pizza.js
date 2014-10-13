@@ -34,7 +34,7 @@ function getCustomerInfo() {
 function updatePage() {
 	if (request.readyState == 4) {
 		// 응답 메시지의 body 부분의 문자열을 받아옴
-		var customerAddress = request.reponseText;
+		var customerAddress = request.responseText;
 		// pizza.html의 고객 주소 <textarea>에 위 값을 표시
 		document.getElementById("addr").value = customerAddress;
 	}

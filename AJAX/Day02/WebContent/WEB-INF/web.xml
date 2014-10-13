@@ -13,4 +13,25 @@
 		<url-pattern>/lookUpCustomer</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>po</servlet-name>
+		<servlet-class>pizza.servlet.PlaceOrder</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>po</servlet-name>
+		<url-pattern>/placeOrder</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
+
+
+
+
+
+
+
+
+
+
+
+
