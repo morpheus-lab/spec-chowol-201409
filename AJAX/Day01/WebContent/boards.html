@@ -36,6 +36,25 @@
 		request.send(null);
 	}
 	
+	// XHR 콜백 함수
+	function updatePage() {
+		if (request.readyState == 3) {
+			console.log("readyState가 3으로 변경!!")
+		}
+		
+		if (request.readyState == 4) { // 응답 메시지 수신 완료 상태
+			var total = request.responseText;
+			var unitPrice = document.getElementById("unit_price").innerHTML.substring(1);
+			var unitCost = document.getElementById("unit_cost").innerHTML.substring(1);
+			var newProfit = (unitPrice - unitCost) * total;
+			
+			// 새로운 판매대수를 화면의 표에 반영
+			document.getElementById("boards_sold").innerHTML = total;
+			// 새로운 총 이익을 화면에 반영
+			document.getElementById("profit").innerHTML = "$" + newProfit;
+		}
+	}
+	
 </script>
 </head>
 <body>
@@ -46,21 +65,21 @@
 <table border="1">
 	<tr>
 		<td>스노보드 판매대수</td>
-		<td>1012</td>
+		<td id="boards_sold">1012</td>
 	</tr>
 	<tr>
 		<td>판매단가</td>
-		<td>$249.95</td>
+		<td id="unit_price">$249.95</td>
 	</tr>
 	<tr>
 		<td>원가</td>
-		<td>$84.22</td>
+		<td id="unit_cost">$84.22</td>
 	</tr>
 </table>
 
-<p>판매 총 이익: $167718.76</p>
+<p>판매 총 이익: <span id="profit">$167718.76</span></p>
 
-<input type="button" value="Show me the money" />
+<input type="button" value="Show me the money" onclick="getBoardsSold()" />
 
 </body>
 </html>
