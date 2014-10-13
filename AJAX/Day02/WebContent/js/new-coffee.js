@@ -17,7 +17,47 @@ function getBeverage() {
 }
 
 function serveDrink() {
-	
+	if (request1.readyState == 4) {
+		// request1의 응답을 처리
+		if (request1.status == 200) {
+			var resMessage = request1.responseText;
+			// 맨 첫 문자 1개를 읽어서 어느 커피메이커에 대한 응답인지 판단
+			var whichCoffeeMaker = resMessage.substring(0, 1);
+			// 2번째 문자부터 끝까지 읽어서 커피를 주문한 사람의 이름을 추출
+			var name = resMessage.substring(1);
+			// alert 누구누구의 커피가 완성되었다.
+			alert(name + "의 커피가 나왔습니다.")
+			// 커피메이커의 status 문구를 "Idle" 변경
+			if (whichCoffeeMaker == "1") {
+				replaceText(document.getElementById("coffeemaker1-status"), "Idle");
+			} else {
+				replaceText(document.getElementById("coffeemaker2-status"), "Idle");
+			}
+		} else {
+			alert("에러가 발생했습니다. " + request1.status);
+		}
+		request1 = createRequest();
+	} else if (request2.readyState == 4) {
+		// request2의 응답을 처리
+		if (request2.status == 200) {
+			var resMessage = request2.responseText;
+			// 맨 첫 문자 1개를 읽어서 어느 커피메이커에 대한 응답인지 판단
+			var whichCoffeeMaker = resMessage.substring(0, 1);
+			// 2번째 문자부터 끝까지 읽어서 커피를 주문한 사람의 이름을 추출
+			var name = resMessage.substring(1);
+			// alert 누구누구의 커피가 완성되었다.
+			alert(name + "의 커피가 나왔습니다.")
+			// 커피메이커의 status 문구를 "Idle" 변경
+			if (whichCoffeeMaker == "1") {
+				replaceText(document.getElementById("coffeemaker1-status"), "Idle");
+			} else {
+				replaceText(document.getElementById("coffeemaker2-status"), "Idle");
+			}
+		} else {
+			alert("에러가 발생했습니다. " + request2.status);
+		}
+		request2 = createRequest();
+	}
 }
 
 function sendRequest(request, url) {
@@ -54,12 +94,14 @@ function orderCoffee() {
 		if (status == "Idle") {	// 커피메이커#2가 유휴상태
 			replaceText(divCoffeeMaker2Status,
 					"Brewing " + name + "'s " + size + " " + beverage);
-			sendRequest(request1, url + 2);
+			sendRequest(request2, url + 2);
 		} else {
 			// 커피메이커#1과 커피메이커#2가 모두 사용중인 상태
 			alert("모두 사용중. 잠시후 다시 시도!");
 		}
 	}
+	
+	document.forms[0].reset();
 }
 
 
