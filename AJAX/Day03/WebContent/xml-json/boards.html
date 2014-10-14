@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>스노보드 판매 현황</title>
+<script type="text/javascript">
+	
+	var request = null;
+	
+	// XHR 객체 생성
+	function createRequest() {
+		try {
+			request = new XMLHttpRequest();
+		} catch(trymicrosoft) {
+			try {
+				request = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch(otherms) {
+				try {
+					request = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch(failed) {
+					request = null;
+				}
+			}
+		}
+		if (request == null) {
+			alert("XHR 객체 생성 실패");
+		}
+	}
+	
+	// XHR을 통해 요청을 보내는 함수
+	function getBoardsSold() {
+		createRequest();
+		var url = "./updateSalesXML.jsp?dummy=" + new Date().getTime();
+		request.open("GET", url, true);
+		request.onreadystatechange = updatePage;
+		request.send(null);
+	}
+	
+	// XHR 콜백 함수
+	function updatePage() {
+		if (request.readyState == 4) {
+			if (request.status == 200) {	// 정상 응답
+				var xmlDoc = request.responseXML;
+				//alert(xmlDoc);
+				console.log(xmlDoc);
+				// boards 판매량 업데이트
+				var boardsSold = xmlDoc.getElementsByTagName("boards-sold")[0];
+				var boardsSoldValue = boardsSold.firstChild.nodeValue;
+				document.getElementById("boards_sold").innerHTML
+					= boardsSoldValue;
+				// boots 판매량 업데이트
+				var bootsSold = xmlDoc.getElementsByTagName("boots-sold")[0];
+				var bootsSoldValue = bootsSold.firstChild.nodeValue;
+				document.getElementById("boots_sold").innerHTML
+					= bootsSoldValue;
+				// bindings 판매량 업데이트
+				//document.getElementById("bindings_sold").innerHTML
+				//	= xmlDoc.getElementsByTagName("bindings-sold")[0].firstChild.nodeValue;
+				var bindingsSold = xmlDoc.getElementsByTagName("bindings-sold")[0];
+				var bindingsSoldValue = bindingsSold.firstChild.nodeValue;
+				document.getElementById("bindings_sold").innerHTML
+					= bindingsSoldValue;
+				// 총 이익 계산
+				var boardUnitProfit = document.getElementById("boards_unit_price").firstChild.nodeValue.substring(1)
+					- document.getElementById("boards_unit_cost").firstChild.nodeValue.substring(1);
+				var bootUnitProfit = document.getElementById("boots_unit_price").firstChild.nodeValue.substring(1)
+					- document.getElementById("boots_unit_cost").firstChild.nodeValue.substring(1);
+				var bindingUnitProfit = document.getElementById("bindings_unit_price").firstChild.nodeValue.substring(1)
+					- document.getElementById("bindings_unit_cost").firstChild.nodeValue.substring(1);
+				
+				document.getElementById("profit").innerHTML = "$" +
+					((boardsSoldValue * boardUnitProfit) +
+					(bootsSoldValue * bootUnitProfit) +
+					(bindingsSoldValue * bindingUnitProfit));
+			} else {	// 오류 발생
+				alert("오류발생 - " + request.status);
+			}
+		}
+	}
+	
+</script>
+</head>
+<body>
+
+<h1>Boards 'R' Us :: Custom Boards Report</h1>
+<hr/>
+
+<table border="1" width="300">
+	<tr>
+		<td>스노보드 판매대수</td>
+		<td id="boards_sold" width="80">0</td>
+	</tr>
+	<tr>
+		<td>판매단가</td>
+		<td id="boards_unit_price">$249.95</td>
+	</tr>
+	<tr>
+		<td>원가</td>
+		<td id="boards_unit_cost">$84.22</td>
+	</tr>
+</table>
+<table border="1" width="300">
+	<tr>
+		<td>부츠 판매대수</td>
+		<td id="boots_sold" width="80">0</td>
+	</tr>
+	<tr>
+		<td>판매단가</td>
+		<td id="boots_unit_price">$175.47</td>
+	</tr>
+	<tr>
+		<td>원가</td>
+		<td id="boots_unit_cost">$54.23</td>
+	</tr>
+</table>
+<table border="1" width="300">
+	<tr>
+		<td>바인딩 판매대수</td>
+		<td id="bindings_sold" width="80">0</td>
+	</tr>
+	<tr>
+		<td>판매단가</td>
+		<td id="bindings_unit_price">$146.92</td>
+	</tr>
+	<tr>
+		<td>원가</td>
+		<td id="bindings_unit_cost">$98.03</td>
+	</tr>
+</table>
+
+<p>판매 총 이익: <span id="profit">$0.00</span></p>
+
+<input type="button" value="Show me the money" onclick="getBoardsSold()" />
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

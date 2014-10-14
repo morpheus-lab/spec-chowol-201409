@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	window.onload = function() {
+		document.getElementById('anImage').addEventListener(
+				'click', react, true);	// capture phase
+		document.getElementById('level1').addEventListener(
+				'click', react, false);	// bubble phase
+		document.getElementById('level2').addEventListener(
+				'click', react, true);	// capture phase
+	};
+	
+	function react(event) {
+		document.getElementById('info').innerHTML += 'I woof at '
+				+ event.currentTarget.id + '!<br/>';
+	}
+	
+</script>
+</head>
+<body>
+
+	<div id="level1">
+		<div id="level2">
+			<img id="anImage" src="images/puppy.jpg" width="200" border="0" /><br />
+		</div>
+	</div>
+	<div id="info"></div>
+
+</body>
+</html>
