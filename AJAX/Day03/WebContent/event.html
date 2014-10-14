@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	window.onload = function () {
+		
+		// MS 계열 브라우저(IE)인 경우
+		if (document.getElementById("anImage").attachEvent) {
+			document.getElementById("anImage").attachEvent(
+					"onclick",
+					function () {
+						alert("woof!");
+					}
+				);
+			document.getElementById("anImage").attachEvent(
+					"onclick",
+					function () {
+						alert("woof again!");
+					}
+				);
+		}
+		// W3C 방식의 이벤트 핸들러 추가
+		else {
+			document.getElementById("anImage").addEventListener(
+					"click",
+					function () {
+						alert("woof!");
+					},
+					false);
+			document.getElementById("anImage").addEventListener(
+					"click",
+					function () {
+						alert("woof again!");
+					},
+					false);
+		}
+		
+	};
+</script>
+</head>
+<body>
+	
+<img id="anImage" src="images/puppy.jpg" width="200" border="0" />
+	
+</body>
+</html>

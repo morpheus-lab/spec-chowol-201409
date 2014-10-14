@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	window.onload = function() {
+		document.getElementById("anImage").onclick =
+			function(event) {
+				if (!event) {
+					event = window.event;	// IE 구버전용
+					console.log("window.event를 사용");
+				}
+				var target = null;
+				if (event.target) {
+					target = event.target;
+					console.log("event.target 속성 사용");
+				} else {
+					target = event.srcElement;
+					console.log("event.srcElement 속성 사용");
+				}
+				console.log(target);
+				document.getElementById("info").innerHTML += "woof!<br/>";
+				console.log(event);
+			};
+	};
+</script>
+</head>
+<body>
+	
+<img id="anImage" src="images/puppy.jpg" width="200" border="0" /><br/>
+<div id="info"></div>
+
+</body>
+</html>
