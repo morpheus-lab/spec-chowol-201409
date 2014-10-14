@@ -1,0 +1,101 @@
+<!--
+경  로: WebContent/prototype
+파일명: prototype-sandbox.html
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Prototype Sand Box</title>
+<script type="text/javascript" src="js/prototype.js"></script>
+<script type="text/javascript">
+/*
+var MySampleClass = Class.create();
+MySampleClass.prototype = {
+    initialize: function(message) {
+        this.message = message;
+    },
+    showMessage: function() {
+        alert(this.message);
+    }
+}
+
+var myTalker = new MySampleClass("hello prototype!");
+myTalker.showMessage();
+*/
+
+var Disc = Class.create();
+Disc.prototype = {
+    initialize: function(title, location, type) {
+        this._initializeDisc(title, location, type);
+    },
+    _initializeDisc: function(title, location, type) {
+        this.title = title;
+        this.location = location;
+        this.type = type;
+    },
+    whereIsIt: function() {
+        return "The " + this.type + " titled " + this.title +
+            " is on shelf " + this.location;
+    }
+}
+
+var CD = Class.create();
+CD.prototype = Object.extend(
+		new Disc(),
+		{
+			initialize: function(title, artist, location) {
+				this._initializeDisc(title, location, "CD");
+				this.artist = artist;
+			}
+		}
+);
+
+var DVD = Class.create();
+DVD.prototype = Object.extend(
+		new Disc(),
+		{
+			initialize: function(title, director, location) {
+				this._initializeDisc(title, location, "DVD");
+				this.director = director;
+			}
+		}
+);
+
+var d = new Disc("Greatest Hits", "Shelf A", "LP");
+var cd1 = new CD("Begin Again OST", "Maroon 5", "Shelf C");
+var cd2 = new CD("Wonder Girls", "JYP", "Shelf B");
+var dvd1 = new DVD("Begin Again", "unknown", "Shelf D");
+
+d.whereIsIt();
+cd1.whereIsIt();
+cd2.whereIsIt();
+dvd1.whereIsIt();
+
+</script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

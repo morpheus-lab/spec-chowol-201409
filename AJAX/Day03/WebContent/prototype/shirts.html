@@ -1,0 +1,72 @@
+<!--
+경  로: WebContent/prototype
+파일명: shirts.html
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>shirts.html</title>
+<script type="text/javascript" src="js/prototype.js"></script>
+<script type="text/javascript">
+	function getSizes() {
+		var color = $F("select-color");
+		if (color == "") {
+			return;
+		}
+		
+		var xhr = new Ajax.Request(
+				"getSizes.jsp?color=" + color,
+				{
+					method: "get",
+					onSuccess: displaySizes,
+					onFailure: function(res) {
+						alert("사이즈 조회 실패 " + res.status);
+					}
+				});
+	}
+	
+	function displaySizes(req) {
+		//var sizes = req.responseText;
+		//var sizes = "['M','L']";
+		
+		//eval('var sizes = ' + req.responseText);	//['M','L']
+		//var sizes = ['M','L'];
+		var sizes = eval(req.responseText);
+		//$("sizes").innerHTML = req.responseText;
+		
+		var sizeSelect = $("select-size");
+		
+		while (sizeSelect.options.length > 1) {
+			sizeSelect.remove(1);
+		}
+		
+		for (var i = 0; i < sizes.length; i++) {
+			sizeSelect.add(new Option(sizes[i], sizes[i], null));
+		}
+	}
+	
+</script>
+</head>
+<body>
+
+원하시는 셔츠의 색상을 선택하십시오.<br/>
+<select id="select-color" onchange="getSizes();">
+	<option></option>
+	<option>azure</option>
+	<option>cardinal</option>
+	<option>ecru</option>
+	<option>hunter</option>
+</select>
+<br/><br/>
+<!--
+선택하신 색상의 사이즈는 아래와 같습니다.<br/>
+<div id="sizes"></div>
+-->
+원하시는 사이즈를 선택하십시오.<br/>
+<select id="select-size">
+	<option></option>
+</select>
+
+</body>
+</html>
