@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config
+	PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+	"http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	
+	<form-beans>
+		<form-bean name="boardForm"
+			type="com.spec.first.board.BoardForm" />
+	</form-beans>
+	
+	<action-mappings>
+		<action path="/insert"
+			type="com.spec.first.board.InsertAction"
+			parameter="method"
+			name="boardForm"
+			scope="request" />
+	</action-mappings>
+	
+</struts-config>
