@@ -1,5 +1,7 @@
 package com.spec.first.board;
 
+import java.util.List;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.upload.FormFile;
 
@@ -11,7 +13,7 @@ public class BoardForm extends ActionForm {
 	private String writer; // 게시물 작성자
 	private String writedate; // 게시물 작성일
 	private String hitcount; // 게시물 조회수
-	private FormFile[] boardFiles = new FormFile[2]; // 첨부파일
+	private List<FormFile> boardFiles; // 첨부파일
 
 	public String getBno() {
 		return bno;
@@ -61,11 +63,11 @@ public class BoardForm extends ActionForm {
 		this.hitcount = hitcount;
 	}
 
-	public FormFile[] getBoardFiles() {
+	public List<FormFile> getBoardFiles() {
 		return boardFiles;
 	}
 
-	public void setBoardFiles(FormFile[] boardFiles) {
+	public void setBoardFiles(List<FormFile> boardFiles) {
 		this.boardFiles = boardFiles;
 	}
 
