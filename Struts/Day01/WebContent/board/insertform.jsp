@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/common/include/header.jsp" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 
 <h3>게시물 작성</h3>
 
@@ -11,17 +12,24 @@
 	<table>
 		<tr>
 			<td>제목</td>
-			<td><input type="text" name="subject" /></td>
+			<td>
+				<input type="text" name="subject" value="${param.subject}" />
+				<font color="red"><html:errors property="subject" /></font>
+			</td>
 		</tr>
 		<tr>
 			<td>내용</td>
 			<td>
-				<textarea name="content" rows="5" cols="30"></textarea>
+				<textarea name="content" rows="5" cols="30">${param.content}</textarea>
+				<font color="red"><html:errors property="content" /></font>
 			</td>
 		</tr>
 		<tr>
 			<td>글쓴이</td>
-			<td><input type="text" name="writer" /></td>
+			<td>
+				<input type="text" name="writer" value="${param.writer}" />
+				<font color="red"><html:errors property="writer" /></font>
+			</td>
 		</tr>
 		<tr>
 			<td>첨부파일</td>

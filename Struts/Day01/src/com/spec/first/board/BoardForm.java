@@ -2,7 +2,12 @@ package com.spec.first.board;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
 import org.apache.struts.upload.FormFile;
 
 public class BoardForm extends ActionForm {
@@ -69,6 +74,29 @@ public class BoardForm extends ActionForm {
 
 	public void setBoardFiles(List<FormFile> boardFiles) {
 		this.boardFiles = boardFiles;
+	}
+
+	@Override
+	public ActionErrors validate(ActionMapping mapping,
+			HttpServletRequest request) {
+		ActionErrors errors = new ActionErrors();
+		
+		subject = subject.trim();
+		if (subject.equals("")) {
+			errors.add("subject", new ActionMessage("제목에 공백만 입력할 수 없음", false));
+		}
+		
+		content = content.trim();
+		if (content.equals("")) {
+			errors.add("content", new ActionMessage("내용에 공백만 입력할 수 없음", false));
+		}
+		
+		writer = writer.trim();
+		if (writer.equals("")) {
+			errors.add("writer", new ActionMessage("작성자에 공백만 입력할 수 없음", false));
+		}
+		
+		return errors;
 	}
 
 }

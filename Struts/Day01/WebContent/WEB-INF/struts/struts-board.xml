@@ -14,7 +14,11 @@
 			type="com.spec.first.board.InsertAction"
 			parameter="method"
 			name="boardForm"
-			scope="request" />
+			scope="request"
+			validate="true"
+			input="/insertform.jsp" />
 	</action-mappings>
+	
+	<message-resources parameter="MessageResources" />
 	
 </struts-config>
