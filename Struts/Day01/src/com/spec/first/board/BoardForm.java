@@ -79,8 +79,16 @@ public class BoardForm extends ActionForm {
 	@Override
 	public ActionErrors validate(ActionMapping mapping,
 			HttpServletRequest request) {
-		ActionErrors errors = new ActionErrors();
 		
+		String method = request.getParameter("method");
+		// insert.do?method=insertForm 일 때
+		if (method.equals("insertForm")) {
+			return null;
+		}
+		
+		// insert.do?method=insert 일 때
+		ActionErrors errors = new ActionErrors();
+
 		subject = subject.trim();
 		if (subject.equals("")) {
 			errors.add("subject", new ActionMessage("제목에 공백만 입력할 수 없음", false));

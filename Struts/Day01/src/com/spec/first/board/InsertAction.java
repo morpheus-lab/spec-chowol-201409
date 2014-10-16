@@ -24,8 +24,7 @@ public class InsertAction extends DispatchAction {
 	public ActionForward insertForm(ActionMapping mapping,
 			ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("insertForm 호출됨");
-		return null;
+		return mapping.findForward("insertform");	// => /insertform.jsp로 포워딩
 	}
 	
 	public ActionForward insert(ActionMapping mapping,
@@ -64,7 +63,7 @@ public class InsertAction extends DispatchAction {
 		
 		// view 이동
 		
-		return null;
+		return mapping.findForward("list");	// 글로벌 포워드 "list" => /list.do로 redirect
 	}
 	
 	public String saveFile(FormFile formFile) throws IOException {

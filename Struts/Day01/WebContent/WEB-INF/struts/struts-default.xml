@@ -4,9 +4,21 @@
 	"http://struts.apache.org/dtds/struts-config_1_3.dtd">
 <struts-config>
 	
+	<form-beans>
+		<form-bean name="testForm" type="com.spec.first.TestForm" />
+	</form-beans>
+	
 	<action-mappings>
-		<action path="/welcome" type="com.spec.first.WelcomAction" />
+		<action path="/welcome" type="com.spec.first.WelcomeAction">
+			<forward name="welcome" path="/welcome2.jsp"></forward>
+		</action>
+		
 		<action path="/intro" forward="/intro.jsp" />
+		
+		<action path="/test" type="com.spec.first.TestAction"
+			name="testForm" validate="false" scope="request" cancellable="true">
+			<forward name="view" path="/test.jsp"></forward>
+		</action>
 	</action-mappings>
 	
 </struts-config>
