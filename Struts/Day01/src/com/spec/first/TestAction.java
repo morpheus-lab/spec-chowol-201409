@@ -1,5 +1,8 @@
 package com.spec.first;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,6 +39,27 @@ public class TestAction extends Action {
 		board.getBoardFiles().add(boardFile);
 		
 		request.setAttribute("board", board);
+		
+		// ---------------------------------------------
+		// <c:forEach> TEST
+		
+		List bookList = new ArrayList();
+		bookList.add("JAVA");
+		bookList.add("Servlet/JSP");
+		bookList.add("EJB");
+		
+		request.setAttribute("bookList", bookList);
+		
+		String cityList = "서울,제주,대전";
+		
+		request.setAttribute("cityList", cityList);
+		
+		// -----------------------------------------------
+		// <c:forTokens> TEST
+		
+		String jobList = "프로그래머|디자이너|매니저|공무원|교사";
+		
+		request.setAttribute("jobList", jobList);
 		
 		return mapping.findForward("view");
 	}
