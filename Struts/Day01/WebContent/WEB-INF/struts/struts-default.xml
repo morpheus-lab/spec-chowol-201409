@@ -19,6 +19,15 @@
 			name="testForm" validate="false" scope="request" cancellable="true">
 			<forward name="view" path="/test.jsp"></forward>
 		</action>
+		
+		<action path="/test_html"
+			type="com.spec.first.TestHtmlAction"
+			name="testForm"
+			validate="false"
+			scope="request"
+			cancellable="true">
+			<forward name="view" path="/test_html.jsp"></forward>
+		</action>
 	</action-mappings>
 	
 </struts-config>

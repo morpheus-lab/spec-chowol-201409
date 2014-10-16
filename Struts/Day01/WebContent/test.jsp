@@ -99,7 +99,11 @@ pw: ${param.pw}<br/>
 	</c:if>
 </c:forTokens>
 
+<hr/>
 
+<%-- <c:redirect> 태그 --%>
+
+<c:redirect url="/welcome.jsp" />
 
 
 
