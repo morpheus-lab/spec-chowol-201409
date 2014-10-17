@@ -8,7 +8,7 @@ import java.util.Map;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.upload.FormFile;
 
-import com.spec.first.board.Board;
+import com.spec.first.model.Board;
 
 public class TestForm extends ActionForm {
 

@@ -11,8 +11,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.spec.first.board.Board;
-import com.spec.first.board.BoardFile;
+import com.spec.first.model.Board;
+import com.spec.first.model.BoardFile;
 
 public class TestAction extends Action {
 

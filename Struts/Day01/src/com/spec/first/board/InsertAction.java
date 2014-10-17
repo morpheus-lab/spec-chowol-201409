@@ -4,7 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,10 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 import org.apache.struts.upload.FormFile;
 
+import com.spec.first.model.Board;
+import com.spec.first.model.BoardDao;
+import com.spec.first.model.BoardFile;
+import com.spec.first.model.ConnectionPool;
 import com.spec.first.util.StringUtils;
 
 public class InsertAction extends DispatchAction {
@@ -60,6 +65,41 @@ public class InsertAction extends DispatchAction {
 		}
 		
 		board.setBoardFiles(boardFiles);
+		
+		// DB에 저장
+		Connection connection = null;
+		try {
+			connection = ConnectionPool.getConnection();
+			connection.setAutoCommit(false);
+			
+			// DAO 객체 생성
+			BoardDao boardDao = new BoardDao();
+			boardDao.setConnection(connection);
+			// board 테이블에 데이터 삽입
+			boardDao.insert(board);
+			// 첨부파일#1
+			
+			// 첨부파일#2
+			
+			connection.commit();
+			
+		} catch(Exception e) {
+			try {
+				connection.rollback();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			// connection 반납
+			if (connection != null) {
+				try {
+					connection.setAutoCommit(true);
+				} catch (Exception e) {}
+				try {
+					connection.close();
+				} catch (Exception e) {}
+			}
+		}
 		
 		// view 이동
 		

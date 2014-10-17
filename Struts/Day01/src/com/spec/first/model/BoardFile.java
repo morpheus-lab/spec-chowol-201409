@@ -1,28 +1,28 @@
-package com.spec.first.board;
+package com.spec.first.model;
 
 import java.io.Serializable;
 
 public class BoardFile implements Serializable {
 
-	private Integer fno;
-	private Integer bno;
+	private long fno;
+	private long bno;
 	private String originalName;
-	private String contentType;
 	private String savedName;
+	private String contentType;
 
-	public Integer getFno() {
+	public long getFno() {
 		return fno;
 	}
 
-	public void setFno(Integer fno) {
+	public void setFno(long fno) {
 		this.fno = fno;
 	}
 
-	public Integer getBno() {
+	public long getBno() {
 		return bno;
 	}
 
-	public void setBno(Integer bno) {
+	public void setBno(long bno) {
 		this.bno = bno;
 	}
 
@@ -34,20 +34,20 @@ public class BoardFile implements Serializable {
 		this.originalName = originalName;
 	}
 
-	public String getContentType() {
-		return contentType;
-	}
-
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
-	}
-
 	public String getSavedName() {
 		return savedName;
 	}
 
 	public void setSavedName(String savedName) {
 		this.savedName = savedName;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.spec.first.board;
+package com.spec.first.model;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -7,23 +7,19 @@ import java.util.List;
 
 public class Board implements Serializable {
 
-	private Integer bno;
+	private long bno;
 	private String subject;
 	private String content;
 	private String writer;
 	private Date writedate;
 	private int hitcount;
-	private List<BoardFile> boardFiles;
+	private List<BoardFile> boardFiles = new ArrayList<BoardFile>();
 
-	public Board() {
-		boardFiles = new ArrayList<BoardFile>();
-	}
-
-	public Integer getBno() {
+	public long getBno() {
 		return bno;
 	}
 
-	public void setBno(Integer bno) {
+	public void setBno(long bno) {
 		this.bno = bno;
 	}
 
