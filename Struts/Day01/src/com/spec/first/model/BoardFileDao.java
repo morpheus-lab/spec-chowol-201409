@@ -15,7 +15,7 @@ public class BoardFileDao {
 		String sql = "INSERT INTO boardfile VALUES(seq_boardfile_fno.NEXTVAL,?,?,?,?)";
 		// prepare statement
 		PreparedStatement pstmt = connection.prepareStatement(sql);
-		pstmt.setLong(1, 1L);	// TODO - bno 값 넣어줘야 함
+		pstmt.setLong(1, boardFile.getBno());
 		pstmt.setString(2, boardFile.getOriginalName());
 		pstmt.setString(3, boardFile.getSavedName());
 		pstmt.setString(4, boardFile.getContentType());

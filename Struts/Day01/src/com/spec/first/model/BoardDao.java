@@ -2,6 +2,7 @@ package com.spec.first.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class BoardDao {
 	
@@ -11,17 +12,32 @@ public class BoardDao {
 		this.connection = connection;
 	}
 	
-	public void insert(Board board) throws Exception {
-		String sql = "INSERT INTO board VALUES(seq_board_bno.NEXTVAL,?,?,?,SYSDATE,0)";
-		// prepare statement
+	public long insert(Board board) throws Exception {
+		long bno = -1L;
+		
+		String sql = "SELECT seq_board_bno.NEXTVAL FROM DUAL";
 		PreparedStatement pstmt = connection.prepareStatement(sql);
-		pstmt.setString(1, board.getSubject());
-		pstmt.setString(2, board.getContent());
-		pstmt.setString(3, board.getWriter());
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next()) {
+			bno = rs.getLong(1);
+			board.setBno(bno);
+		}
+		rs.close();
+		pstmt.close();
+		
+		sql = "INSERT INTO board VALUES(?,?,?,?,SYSDATE,0)";
+		// prepare statement
+		pstmt = connection.prepareStatement(sql);
+		pstmt.setLong(1, board.getBno());
+		pstmt.setString(2, board.getSubject());
+		pstmt.setString(3, board.getContent());
+		pstmt.setString(4, board.getWriter());
 		// execute
 		pstmt.executeUpdate();// SELECT 이외의 DML
 		
 		pstmt.close();
+		
+		return bno;
 	}
 	
 }

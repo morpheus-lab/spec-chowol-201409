@@ -21,6 +21,7 @@ import org.apache.struts.upload.FormFile;
 import com.spec.first.model.Board;
 import com.spec.first.model.BoardDao;
 import com.spec.first.model.BoardFile;
+import com.spec.first.model.BoardFileDao;
 import com.spec.first.model.ConnectionPool;
 import com.spec.first.util.StringUtils;
 
@@ -40,15 +41,16 @@ public class InsertAction extends DispatchAction {
 		
 		// 모델 영역으로 보낼 DTO 준비
 		Board board = new Board();
-		board.setSubject(
-				StringUtils.convertCharset(
-						boardForm.getSubject(), null, null));
-		board.setContent(
-				StringUtils.convertCharset(
-						boardForm.getContent(), null, null));
-		board.setWriter(
-				StringUtils.convertCharset(
-						boardForm.getWriter(), null, null));
+		board.setSubject(boardForm.getSubject());
+		board.setContent(boardForm.getContent());
+		board.setWriter(boardForm.getWriter());
+		
+		// 파라미터 확인
+		System.out.println("subj: " + board.getSubject());
+		System.out.println("cont: " + board.getContent());
+		System.out.println("writ: " + board.getWriter());
+		
+		
 		// 클라이언트가 보낸 파일 처리
 		List<BoardFile> boardFiles = new ArrayList<BoardFile>();
 		for (int i = 0; i < boardForm.getBoardFiles().size(); i++) {
@@ -76,10 +78,16 @@ public class InsertAction extends DispatchAction {
 			BoardDao boardDao = new BoardDao();
 			boardDao.setConnection(connection);
 			// board 테이블에 데이터 삽입
-			boardDao.insert(board);
-			// 첨부파일#1
-			
-			// 첨부파일#2
+			long bno = boardDao.insert(board);
+			if (bno > -1L && boardFiles.size() > 0) {
+				BoardFileDao boardFileDao = new BoardFileDao();
+				boardFileDao.setConnection(connection);
+				
+				for (int i = 0; i < boardFiles.size(); i++) {
+					boardFiles.get(i).setBno(bno);
+					boardFileDao.insert(boardFiles.get(i));
+				}
+			}
 			
 			connection.commit();
 			
