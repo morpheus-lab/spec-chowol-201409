@@ -22,7 +22,7 @@ public class TestAction extends Action {
 			throws Exception {
 		
 		Board board = new Board();
-		board.setBno(5);
+		board.setBno(5L);
 		board.setSubject("첫번째 게시물");
 		board.setContent("첫번째 게시물 내용");
 		board.setWriter("홍길동");
@@ -30,8 +30,8 @@ public class TestAction extends Action {
 		board.setHitcount(5);
 		
 		BoardFile boardFile = new BoardFile();
-		boardFile.setFno(10);
-		boardFile.setBno(5);
+		boardFile.setFno(10L);
+		boardFile.setBno(5L);
 		boardFile.setOriginalName("originalname.gif");
 		boardFile.setSavedName("savedname.gif");
 		boardFile.setContentType("image/gif");

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/common/include/header.jsp" %>
 
-<table>
+<table border="1">
 	<tr>
 		<th>글번호</th>
 		<th>제목</th>
@@ -10,7 +10,7 @@
 		<th>날짜</th>
 		<th>조회수</th>
 	</tr>
-<c:forEach var="board" items="boardList">
+<c:forEach var="board" items="${boardList}">
 	<tr>
 		<td>${board.bno}</td>
 		<td>${board.subject}</td>

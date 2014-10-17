@@ -7,20 +7,35 @@ import java.util.List;
 
 public class Board implements Serializable {
 
-	private long bno;
+	private Long bno;
+	private String bnoString;
 	private String subject;
 	private String content;
 	private String writer;
 	private Date writedate;
-	private int hitcount;
+	private Integer hitcount;
 	private List<BoardFile> boardFiles = new ArrayList<BoardFile>();
 
-	public long getBno() {
+	public Long getBno() {
 		return bno;
 	}
 
-	public void setBno(long bno) {
+	public void setBno(Long bno) {
 		this.bno = bno;
+		this.bnoString = (bno == null ? null : bno.toString());
+	}
+	
+	public String getBnoString() {
+		return bnoString;
+	}
+
+	public void setBnoString(String bnoString) {
+		this.bnoString = bnoString;
+		try {
+			this.bno = bnoString == null ? null : Long.parseLong(bnoString);
+		} catch (NumberFormatException e) {
+			setBno(null);
+		}
 	}
 
 	public String getSubject() {
@@ -55,11 +70,11 @@ public class Board implements Serializable {
 		this.writedate = writedate;
 	}
 
-	public int getHitcount() {
+	public Integer getHitcount() {
 		return hitcount;
 	}
 
-	public void setHitcount(int hitcount) {
+	public void setHitcount(Integer hitcount) {
 		this.hitcount = hitcount;
 	}
 

@@ -4,25 +4,25 @@ import java.io.Serializable;
 
 public class BoardFile implements Serializable {
 
-	private long fno;
-	private long bno;
+	private Long fno;
+	private Long bno;
 	private String originalName;
 	private String savedName;
 	private String contentType;
 
-	public long getFno() {
+	public Long getFno() {
 		return fno;
 	}
 
-	public void setFno(long fno) {
+	public void setFno(Long fno) {
 		this.fno = fno;
 	}
 
-	public long getBno() {
+	public Long getBno() {
 		return bno;
 	}
 
-	public void setBno(long bno) {
+	public void setBno(Long bno) {
 		this.bno = bno;
 	}
 
