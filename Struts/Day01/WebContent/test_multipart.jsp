@@ -49,6 +49,13 @@
 
 </html:form>
 
+<hr/>
+
+member.id = <bean:message key="member.id" /><br/>
+member.name = <bean:message key="member.name" /><br/>
+member.password = <bean:message key="member.password" /><br/>
+member.phone = <bean:message key="member.phone" /><br/>
+
 <%@ include file="/common/include/footer.jsp" %>
 
 
