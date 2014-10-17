@@ -92,6 +92,7 @@ public class InsertAction extends DispatchAction {
 			connection.commit();
 			
 		} catch(Exception e) {
+			e.printStackTrace();
 			try {
 				connection.rollback();
 			} catch (Exception e1) {
