@@ -23,7 +23,7 @@ public class TestForm extends ActionForm {
 	private List listField = new ArrayList();
 	private Map mapField = new HashMap();
 	private Board boardField = new Board();
-	private FormFile[] formFileField = new FormFile[2];
+	private List<FormFile> formFileField = new ArrayList<FormFile>();
 
 	public String getStringField1() {
 		return stringField1;
@@ -105,11 +105,11 @@ public class TestForm extends ActionForm {
 		this.boardField = boardField;
 	}
 
-	public FormFile[] getFormFileField() {
+	public List<FormFile> getFormFileField() {
 		return formFileField;
 	}
 
-	public void setFormFileField(FormFile[] formFileField) {
+	public void setFormFileField(List<FormFile> formFileField) {
 		this.formFileField = formFileField;
 	}
 
