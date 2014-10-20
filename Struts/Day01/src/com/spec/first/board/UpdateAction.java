@@ -1,6 +1,7 @@
 package com.spec.first.board;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
+import org.apache.struts.upload.FormFile;
 
 import com.spec.first.model.Board;
 import com.spec.first.model.BoardDao;
@@ -65,9 +67,12 @@ public class UpdateAction extends DispatchAction {
 		Connection connection = null;
 		try {
 			connection = ConnectionPool.getConnection();
+			connection.setAutoCommit(false);
 			// DAO 객체 생성
 			BoardDao boardDao = new BoardDao();
 			boardDao.setConnection(connection);
+			BoardFileDao boardFileDao = new BoardFileDao();
+			boardFileDao.setConnection(connection);
 			
 			// 수정 전 board DTO
 			Board board = boardDao.select(Long.parseLong(boardForm.getBno()));
@@ -79,9 +84,39 @@ public class UpdateAction extends DispatchAction {
 			
 			// DB update
 			boardDao.update(board);
+			
+			// boardfile 테이블 작업
+
+			// fno를 기준으로 기존 파일 외 다른 파일은 모두 삭제
+			// => 사용자가 브라우저에서 삭제한 모든 파일을 DB로부터 삭제
+			// DELETE FROM boardfile WHERE fno NOT IN (24, 0);
+			String[] boardFilesFnos = boardForm.getBoardFilesFno();
+			boardFileDao.deleteFileNotInFnos(board.getBno(), boardFilesFnos);
+			
+			// 새롭게 등록한 파일 DB에 등록
+			List<FormFile> boardFiles = boardForm.getBoardFiles();
+			for (FormFile file : boardFiles) {
+				if (!file.getFileName().trim().equals("")) {
+					// 파일 시스템에 저장하고 저장된 이름 리턴받음
+					String savedName = InsertAction.saveFile(file);
+					// BoardFile DTO 만들고
+					BoardFile boardFile = new BoardFile();
+					boardFile.setBno(board.getBno());
+					boardFile.setOriginalName(file.getFileName());
+					boardFile.setSavedName(savedName);
+					boardFile.setContentType(file.getContentType());
+					// DB에 저장
+					boardFileDao.insert(boardFile);
+				}
+			}
+			
+			connection.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			try {
+				connection.setAutoCommit(true);
+			} catch (Exception e) {}
 			try {
 				connection.close();
 			} catch (Exception e) {}

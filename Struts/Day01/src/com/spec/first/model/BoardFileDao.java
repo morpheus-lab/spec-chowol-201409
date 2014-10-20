@@ -89,6 +89,23 @@ public class BoardFileDao {
 		return result;
 	}
 	
+	// String[] fnos = {24, 0}
+	public void deleteFileNotInFnos(long bno, String[] fnos) throws SQLException {
+		String set = "";
+		for (int i = 0; i < fnos.length; i++) {
+			if (i > 0) {
+				set += ", ";
+			}
+			set += fnos[i];
+		}
+		// set => "24, 0"
+		String sql = "DELETE FROM boardfile WHERE bno=? AND fno NOT IN (" + set + ")";
+		PreparedStatement pstmt = connection.prepareStatement(sql);
+		pstmt.setLong(1, bno);
+		pstmt.executeUpdate();
+		pstmt.close();
+	}
+	
 }
 
 

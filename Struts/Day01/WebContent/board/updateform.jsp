@@ -31,9 +31,11 @@
 						<c:if test="${not empty board.boardFiles[idx]}">
 							${board.boardFiles[idx].originalName}
 							<input type="button" value="삭제" onclick="checkFileDelete(${idx})" />
+							<input type="hidden" name="boardFilesFno" value="${board.boardFiles[idx].fno}" />
 						</c:if>
 						<c:if test="${empty board.boardFiles[idx]}">
-							<input type="file" />
+							<input type="file" name="boardFiles" />
+							<input type="hidden" name="boardFilesFno" value="0" />
 						</c:if>
 					</div>
 				</c:forEach>
@@ -79,7 +81,22 @@
 	function checkFileDelete(idx) {
 		if (confirm("첨부파일을 삭제하시겠습니까?")) {
 			var fileDiv = $("file" + idx);
-			console.log(fileDiv);
+			while (fileDiv.firstChild) {
+				fileDiv.removeChild(fileDiv.firstChild);
+			}
+			
+			var fileInputEl = document.createElement("input");
+			fileInputEl.type = "file";
+			fileInputEl.name = "boardFiles";
+			
+			fileDiv.appendChild(fileInputEl);
+			
+			var hiddenInputEl = document.createElement("input");
+			hiddenInputEl.type = "hidden";
+			hiddenInputEl.name = "boardFilesFno";
+			hiddenInputEl.value = "0";
+			
+			fileDiv.appendChild(hiddenInputEl);
 		}
 	}
 	

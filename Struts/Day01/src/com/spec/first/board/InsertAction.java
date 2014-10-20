@@ -115,7 +115,7 @@ public class InsertAction extends DispatchAction {
 		return mapping.findForward("list");	// 글로벌 포워드 "list" => /list.do로 redirect
 	}
 	
-	public String saveFile(FormFile formFile) throws IOException {
+	public static String saveFile(FormFile formFile) throws IOException {
 		// 파일시스템에 파일을 저장
 		
 		// 파일 저장 경로

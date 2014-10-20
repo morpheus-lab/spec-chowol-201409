@@ -19,6 +19,7 @@ public class BoardForm extends ActionForm {
 	private String writedate; // 게시물 작성일
 	private String hitcount; // 게시물 조회수
 	private List<FormFile> boardFiles; // 첨부파일
+	private String[] boardFilesFno; // 첨부파일 PK
 
 	public String getBno() {
 		return bno;
@@ -76,16 +77,24 @@ public class BoardForm extends ActionForm {
 		this.boardFiles = boardFiles;
 	}
 
+	public String[] getBoardFilesFno() {
+		return boardFilesFno;
+	}
+
+	public void setBoardFilesFno(String[] boardFilesFno) {
+		this.boardFilesFno = boardFilesFno;
+	}
+
 	@Override
 	public ActionErrors validate(ActionMapping mapping,
 			HttpServletRequest request) {
-		
+
 		String method = request.getParameter("method");
 		// insert.do?method=insertForm 일 때
 		if (method.equals("insertForm")) {
 			return null;
 		}
-		
+
 		// insert.do?method=insert 일 때
 		ActionErrors errors = new ActionErrors();
 
@@ -93,17 +102,17 @@ public class BoardForm extends ActionForm {
 		if (subject.equals("")) {
 			errors.add("subject", new ActionMessage("제목에 공백만 입력할 수 없음", false));
 		}
-		
+
 		content = content.trim();
 		if (content.equals("")) {
 			errors.add("content", new ActionMessage("내용에 공백만 입력할 수 없음", false));
 		}
-		
+
 		writer = writer.trim();
 		if (writer.equals("")) {
 			errors.add("writer", new ActionMessage("작성자에 공백만 입력할 수 없음", false));
 		}
-		
+
 		return errors;
 	}
 
