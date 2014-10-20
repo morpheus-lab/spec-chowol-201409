@@ -20,5 +20,7 @@
 	</tr>
 </c:forEach>
 </table>
-
+<br/>
+<a href="insert.do?method=insertForm">새 글 쓰기</a>
+<br/>
 <%@ include file="/common/include/footer.jsp" %>

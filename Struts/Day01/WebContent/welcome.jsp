@@ -8,7 +8,11 @@
 </head>
 <body>
 
-어서와~
+<h3>메뉴</h3>
+<ul>
+	<li><a href="board/list.do">글 목록</a></li>
+	<li><a href="board/insert.do?method=insertForm">새 글 쓰기</a></li>
+</ul>
 
 </body>
 </html>

@@ -10,7 +10,7 @@
 	
 	<action-mappings>
 		<action path="/welcome" type="com.spec.first.WelcomeAction">
-			<forward name="welcome" path="/welcome2.jsp"></forward>
+			<forward name="welcome" path="/welcome.jsp"></forward>
 		</action>
 		
 		<action path="/intro" forward="/intro.jsp" />

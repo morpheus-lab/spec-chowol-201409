@@ -2,6 +2,10 @@ package com.spec.first.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BoardFileDao {
 	
@@ -25,4 +29,50 @@ public class BoardFileDao {
 		pstmt.close();
 	}
 	
+	public List<BoardFile> select(long bno) throws SQLException {
+		String sql = "SELECT * FROM boardfile WHERE bno=? ORDER BY fno";
+		PreparedStatement pstmt = connection.prepareStatement(sql);
+		pstmt.setLong(1, bno);
+		ResultSet rs = pstmt.executeQuery();
+		
+		List<BoardFile> boardfileList = new ArrayList<BoardFile>();
+		while (rs.next()) {
+			BoardFile boardFile = new BoardFile();
+			// 값 세팅
+			boardFile.setFno(rs.getLong("fno"));
+			boardFile.setBno(rs.getLong("bno"));
+			boardFile.setOriginalName(rs.getString("originalname"));
+			boardFile.setSavedName(rs.getString("savedname"));
+			boardFile.setContentType(rs.getString("contenttype"));
+			
+			boardfileList.add(boardFile);
+		}
+		
+		rs.close();
+		pstmt.close();
+		
+		return boardfileList;
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

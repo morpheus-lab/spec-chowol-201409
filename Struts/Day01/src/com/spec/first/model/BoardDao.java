@@ -3,6 +3,7 @@ package com.spec.first.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +69,55 @@ public class BoardDao {
 		return boardList;
 	}
 	
+	public Board select(long bno) throws SQLException {
+		String sql = "SELECT * FROM board WHERE bno=?";
+		PreparedStatement pstmt = connection.prepareStatement(sql);
+		pstmt.setLong(1, bno);
+		ResultSet rs = pstmt.executeQuery();
+		
+		Board board = null;
+		if (rs.next()) {
+			board = new Board();
+			board.setBno(rs.getLong("bno"));
+			board.setSubject(rs.getString("subject"));
+			board.setContent(rs.getString("content"));
+			board.setWriter(rs.getString("writer"));
+			board.setWritedate(rs.getDate("writedate"));
+			board.setHitcount(rs.getInt("hitcount"));
+		}
+		
+		rs.close();
+		pstmt.close();
+		
+		return board;
+	}
+	
+	public boolean increaseHitCount(long bno) throws SQLException {
+		String sql = "UPDATE board SET hitcount = hitcount + 1 WHERE bno=?";
+		PreparedStatement pstmt = connection.prepareStatement(sql);
+		pstmt.setLong(1, bno);
+		int result = pstmt.executeUpdate();
+		pstmt.close();
+		
+		return (result > 0);
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
