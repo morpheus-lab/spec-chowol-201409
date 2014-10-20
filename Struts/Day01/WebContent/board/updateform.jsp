@@ -12,32 +12,37 @@
 
 	<table border="1" width="500">
 		<tr>
-			<td>제목</td>
+			<td bgcolor="yellow">제목</td>
 			<td><input type="text" name="subject" value="${board.subject}" /></td>
 		</tr>
 		<tr>
-			<td>내용</td>
+			<td bgcolor="yellow">내용</td>
 			<td><textarea name="content" cols="55" rows="5">${board.content}</textarea></td>
 		</tr>
 		<tr>
-			<td>글쓴이</td>
+			<td bgcolor="yellow">글쓴이</td>
 			<td><input type="text" name="writer" value="${board.writer}" /></td>
 		</tr>
 		<tr>
-			<td>첨부파일</td>
+			<td bgcolor="yellow">첨부파일</td>
 			<td>
-				<c:if test="${not empty board.boardFiles}">
-					<c:forEach var="boardFile" items="${board.boardFiles}">
-						${boardFile.originalName}
-						<input type="button" value="삭제" onclick="" />
-						<br/>
-					</c:forEach>
-				</c:if>
+				<c:forEach var="idx" begin="0" end="1" step="1">
+					<div id="file${idx}">
+						<c:if test="${not empty board.boardFiles[idx]}">
+							${board.boardFiles[idx].originalName}
+							<input type="button" value="삭제" onclick="checkFileDelete(${idx})" />
+						</c:if>
+						<c:if test="${empty board.boardFiles[idx]}">
+							<input type="file" />
+						</c:if>
+					</div>
+				</c:forEach>
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2">
+			<td colspan="2" align="center">
 				<input type="button" value="수정하기" onclick="checkData()" />
+				<input type="button" value="취소" onclick="history.back()" />
 			</td>
 		</tr>
 	</table>
@@ -70,6 +75,14 @@
 		
 		window.document.updateForm.submit();
 	}
+	
+	function checkFileDelete(idx) {
+		if (confirm("첨부파일을 삭제하시겠습니까?")) {
+			var fileDiv = $("file" + idx);
+			console.log(fileDiv);
+		}
+	}
+	
 </script>
 
 

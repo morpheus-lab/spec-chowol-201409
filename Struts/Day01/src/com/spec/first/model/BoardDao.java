@@ -112,6 +112,25 @@ public class BoardDao {
 		
 		return (deleted > 0);
 	}
+
+	public boolean update(Board board) throws SQLException {
+		boolean result = false;
+		// SQL 구문 작성
+		String sql = "UPDATE board SET subject=?, content=?, writer=? WHERE bno=?";
+		// preparing statement
+		PreparedStatement pstmt = connection.prepareStatement(sql);
+		// 쿼리 파라미터 값 설정
+		pstmt.setString(1, board.getSubject());
+		pstmt.setString(2, board.getContent());
+		pstmt.setString(3, board.getWriter());
+		pstmt.setLong(4, board.getBno());
+		// 쿼리 실행
+		result = pstmt.executeUpdate() > 0;
+		// 자원 정리
+		pstmt.close();
+		
+		return result;
+	}
 	
 }
 

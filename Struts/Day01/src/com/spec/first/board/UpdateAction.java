@@ -54,4 +54,44 @@ public class UpdateAction extends DispatchAction {
 		return mapping.findForward("updateform");
 	}
 	
+	public ActionForward update(ActionMapping mapping,
+			ActionForm form,
+			HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		BoardForm boardForm = (BoardForm) form;
+		
+		// DB 작업
+		Connection connection = null;
+		try {
+			connection = ConnectionPool.getConnection();
+			// DAO 객체 생성
+			BoardDao boardDao = new BoardDao();
+			boardDao.setConnection(connection);
+			
+			// 수정 전 board DTO
+			Board board = boardDao.select(Long.parseLong(boardForm.getBno()));
+			
+			// board DTO에 수정된 값 세팅
+			board.setSubject(boardForm.getSubject());
+			board.setContent(boardForm.getContent());
+			board.setWriter(boardForm.getWriter());
+			
+			// DB update
+			boardDao.update(board);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (Exception e) {}
+		}
+		
+		ActionForward af = new ActionForward();
+		af.setPath("view.do?bno=" + boardForm.getBno());
+		af.setRedirect(true);
+		
+		return af;
+	}
+	
 }

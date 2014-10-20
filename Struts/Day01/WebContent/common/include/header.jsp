@@ -19,5 +19,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Struts</title>
+<script type="text/javascript"
+	src="<%= request.getContextPath() %>/js/prototype.js"></script>
 </head>
 <body>
