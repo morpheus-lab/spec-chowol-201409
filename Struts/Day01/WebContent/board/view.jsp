@@ -45,6 +45,8 @@
 	</tr>
 </table>
 <br/>
+<a href="delete.do?bno=${board.bno}"
+	onclick="return confirm('정말 삭제하시겠습니까?')">삭제하기</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="list.do">목록으로</a>
 <br/>
 

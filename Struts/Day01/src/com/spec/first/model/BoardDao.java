@@ -101,6 +101,17 @@ public class BoardDao {
 		
 		return (result > 0);
 	}
+
+	public boolean delete(long bno) throws SQLException {
+		String sql = "DELETE FROM board WHERE bno=?";
+		PreparedStatement pstmt = connection.prepareStatement(sql);
+		pstmt.setLong(1, bno);
+		int deleted = pstmt.executeUpdate();
+		
+		pstmt.close();
+		
+		return (deleted > 0);
+	}
 	
 }
 

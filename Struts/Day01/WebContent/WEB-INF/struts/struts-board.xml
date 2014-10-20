@@ -34,6 +34,8 @@
 		
 		<action path="/download" type="com.spec.first.board.DownloadAction" />
 		
+		<action path="/delete" type="com.spec.first.board.DeleteAction" />
+		
 	</action-mappings>
 	
 	<message-resources parameter="MessageResources" />

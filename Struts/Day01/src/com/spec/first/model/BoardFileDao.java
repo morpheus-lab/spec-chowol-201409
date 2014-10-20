@@ -76,6 +76,18 @@ public class BoardFileDao {
 		
 		return boardFile;
 	}
+
+	public boolean deleteByBno(long bno) throws SQLException {
+		boolean result = false;
+		String sql = "DELETE FROM boardfile WHERE bno=?";
+		PreparedStatement pstmt = connection.prepareStatement(sql);
+		pstmt.setLong(1, bno);
+		result = pstmt.executeUpdate() > 0;
+		
+		pstmt.close();
+		
+		return result;
+	}
 	
 }
 
