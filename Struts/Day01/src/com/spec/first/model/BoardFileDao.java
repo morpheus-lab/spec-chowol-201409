@@ -54,6 +54,29 @@ public class BoardFileDao {
 		return boardfileList;
 	}
 	
+	public BoardFile selectOne(long fno) throws SQLException {
+		BoardFile boardFile = null;
+		
+		String sql = "SELECT * FROM boardfile WHERE fno=?";
+		PreparedStatement pstmt = connection.prepareStatement(sql);
+		pstmt.setLong(1, fno);
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next()) {
+			boardFile = new BoardFile();
+			boardFile.setFno(rs.getLong("fno"));
+			boardFile.setBno(rs.getLong("bno"));
+			boardFile.setOriginalName(rs.getString("originalname"));
+			boardFile.setSavedName(rs.getString("savedname"));
+			boardFile.setContentType(rs.getString("contenttype"));
+		}
+		
+		// 자원 반납
+		rs.close();
+		pstmt.close();
+		
+		return boardFile;
+	}
+	
 }
 
 

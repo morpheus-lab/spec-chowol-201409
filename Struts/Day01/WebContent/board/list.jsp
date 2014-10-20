@@ -13,7 +13,7 @@
 <c:forEach var="board" items="${boardList}">
 	<tr>
 		<td>${board.bno}</td>
-		<td>${board.subject}</td>
+		<td><a href="view.do?bno=${board.bno}">${board.subject}</a></td>
 		<td>${board.writer}</td>
 		<td>${board.writedate}</td>
 		<td>${board.hitcount}</td>

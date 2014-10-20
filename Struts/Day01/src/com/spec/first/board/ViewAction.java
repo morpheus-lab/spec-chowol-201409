@@ -25,20 +25,32 @@ public class ViewAction extends Action {
 			throws Exception {
 		long bno = Long.parseLong(request.getParameter("bno"));
 		
-		Connection conn = ConnectionPool.getConnection();
-		// DB에서 bno에 해당하는 게시물 조회 (board 테이블 조회)
-		BoardDao boardDao = new BoardDao();
-		boardDao.setConnection(conn);
-		Board board = boardDao.select(bno);
+		Board board = null;
+		Connection conn = null;
 		
-		// 게시물 딸린 첨부파일 조회 (boardfile 테이블 조회)
-		BoardFileDao boardFileDao = new BoardFileDao();
-		boardFileDao.setConnection(conn);
-		List<BoardFile> boardFileList = boardFileDao.select(bno);
-		board.setBoardFiles(boardFileList);
-		
-		// 조회수 1 증가
-		boardDao.increaseHitCount(bno);
+		try {
+			conn = ConnectionPool.getConnection();
+			// DB에서 bno에 해당하는 게시물 조회 (board 테이블 조회)
+			BoardDao boardDao = new BoardDao();
+			boardDao.setConnection(conn);
+			board = boardDao.select(bno);
+			String content = board.getContent().replaceAll("\\n", "<br/>");
+			board.setContent(content);
+			
+			// 게시물 딸린 첨부파일 조회 (boardfile 테이블 조회)
+			BoardFileDao boardFileDao = new BoardFileDao();
+			boardFileDao.setConnection(conn);
+			List<BoardFile> boardFileList = boardFileDao.select(bno);
+			board.setBoardFiles(boardFileList);
+			
+			// 조회수 1 증가
+			boardDao.increaseHitCount(bno);
+		} catch (Exception e) {
+		} finally {
+			try {
+				conn.close();
+			} catch (Exception e) {}
+		}
 		
 		// 위 내용을 View에 전달할 수 있도록 request attribute로 저장
 		request.setAttribute("board", board);
