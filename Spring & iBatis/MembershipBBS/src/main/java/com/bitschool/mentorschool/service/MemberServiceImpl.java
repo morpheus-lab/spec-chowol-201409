@@ -24,10 +24,14 @@ public class MemberServiceImpl implements MemberService {
 			throw new Exception("MemberVO가 NULL입니다.");
 		}
 		
-		int insertResult = dao.create(member);
-		if (insertResult < 1) {
-			throw new Exception("INSERT 실패");
+		int insertResult = 0;
+		
+		try {
+			insertResult = dao.create(member);
+		} catch (Exception e) {
+			throw e;
 		}
+		
 	}
 
 }

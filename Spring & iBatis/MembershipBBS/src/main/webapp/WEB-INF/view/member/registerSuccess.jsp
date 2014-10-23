@@ -4,15 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원제 답변형 게시판</title>
+<title>회원 가입 완료</title>
 </head>
 <body>
-
-어서오세요~<br/>
-<br/>
-<br/>
-<a href="<%= request.getContextPath() %>/signup">회원가입</a><br/>
-<a href="<%= request.getContextPath() %>/login">로그인</a>
-
+	
+	<h3>회원 가입이 완료되었습니다.</h3>
+	<br/>
+	<br/>
+	<a href="<%= request.getContextPath() %>/">홈으로</a><br/>
+	<a href="<%= request.getContextPath() %>/login">로그인 페이지로</a>
+	
 </body>
 </html>

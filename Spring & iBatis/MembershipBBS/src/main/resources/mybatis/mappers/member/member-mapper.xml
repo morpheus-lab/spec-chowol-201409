@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper>
+	
+	<insert id="registerMember" parameterType="com.bitschool.mentorschool.vo.MemberVO">
+		
+		<selectKey keyProperty="memberId" resultType="java.lang.Long" order="BEFORE">
+			SELECT member_seq.NEXTVAL FROM DUAL
+		</selectKey>
+		
+		INSERT INTO member(memberid,name,email,gender,id,pw,
+							telareacode,tel1,tel2,cellareacode,
+							cell1,cell2,regdate)
+		VALUES (
+			#{memberId},
+			#{name},
+			#{email},
+			#{gender},
+			#{id},
+			#{pw},
+			#{telAreaCode},
+			#{tel1},
+			#{tel2},
+			#{cellAreaCode},
+			#{cell1},
+			#{cell2},
+			SYSDATE
+		)
+	</insert>
+	
+	<!-- <select id=""></select>
+	
+	<update id=""></update>
+	
+	<delete id=""></delete> -->
+	
+</mapper>

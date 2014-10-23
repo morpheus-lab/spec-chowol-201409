@@ -4,15 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원제 답변형 게시판</title>
+<title>회원 가입 실패</title>
 </head>
 <body>
 
-어서오세요~<br/>
-<br/>
-<br/>
-<a href="<%= request.getContextPath() %>/signup">회원가입</a><br/>
-<a href="<%= request.getContextPath() %>/login">로그인</a>
+	<h3>회원 가입에 실패하였습니다.</h3>
+	<div>
+		원인: ${failMessage}
+	</div>
 
 </body>
 </html>

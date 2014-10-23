@@ -17,13 +17,13 @@ import com.bitschool.mentorschool.service.MemberService;
 import com.bitschool.mentorschool.vo.MemberVO;
 
 @Controller
-public class MembershipController {
+public class MemberController {
 	
 	@Inject
 	private MemberService service;
 	
 	@RequestMapping(value="/check")
-	public void injectionTest(HttpServletRequest req, HttpServletResponse res) throws IOException {
+	public void injectionTest(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		res.setCharacterEncoding("UTF-8");
 		res.setContentType("text/plain");
 		
@@ -34,7 +34,7 @@ public class MembershipController {
 	
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
 	public String showSignUpForm() {
-		return "membership/signUpForm";
+		return "member/signUpForm";
 		// => /WEB-INF/view/membership/signUpForm.jsp
 	}
 	
@@ -43,9 +43,15 @@ public class MembershipController {
 			@ModelAttribute MemberVO member
 			) {
 		
-		System.out.println(member);
+		try {
+			service.registerMember(member);
+			return "member/registerSuccess";
+		} catch (Exception e) {
+			e.printStackTrace();
+			req.setAttribute("failMessage", e.getMessage());
+			return "member/registerFailure";
+		}
 		
-		return null;
 	}
 	
 }
