@@ -1,7 +1,10 @@
 package com.bitschool.mentorschool.dao;
 
+import org.springframework.stereotype.Repository;
+
 import com.bitschool.mentorschool.vo.MemberVO;
 
+@Repository
 public class MemberDAOImpl implements MemberDAO {
 
 	@Override
@@ -13,6 +16,7 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public MemberVO read(Long memberId) {
 		// TODO Auto-generated method stub
+		System.out.println("MemberVO의 read 메서드 호출!!!");
 		return null;
 	}
 

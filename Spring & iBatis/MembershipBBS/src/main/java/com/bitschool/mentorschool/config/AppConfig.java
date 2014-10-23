@@ -9,9 +9,9 @@ import com.bitschool.mentorschool.service.MemberServiceImpl;
 @Configuration
 public class AppConfig {
 	
-	@Bean
-	public MemberService memberService() {
-		return new MemberServiceImpl();
-	}
+//	@Bean
+//	public MemberService memberService() {
+//		return new MemberServiceImpl();
+//	}
 	// <bean class="...MemberServiceImpl">
 }

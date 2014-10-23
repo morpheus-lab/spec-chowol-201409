@@ -1,10 +1,7 @@
 package com.bitschool.mentorschool.dao;
 
-import org.springframework.stereotype.Repository;
-
 import com.bitschool.mentorschool.vo.MemberVO;
 
-@Repository
 public interface MemberDAO {
 	
 	void create(MemberVO member);

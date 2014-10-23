@@ -29,6 +29,7 @@ public class MembershipController {
 		
 		PrintWriter writer = res.getWriter();
 		writer.append("service = " + service);
+		service.checkLogin(null);
 	}
 	
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
