@@ -4,15 +4,15 @@ import com.bitschool.mentorschool.vo.MemberVO;
 
 public interface MemberDAO {
 	
-	void create(MemberVO member);
+	int create(MemberVO member) throws Exception;
 	
-	MemberVO read(Long memberId);
-	MemberVO readById(String id);
-	MemberVO readByEmail(String email);
+	MemberVO read(Long memberId) throws Exception;
+	MemberVO readById(String id) throws Exception;
+	MemberVO readByEmail(String email) throws Exception;
 	
-	void update(MemberVO member);
+	void update(MemberVO member) throws Exception;
 	
-	void delete(MemberVO member);
-	void deleteByMemberId(Long memberId);
+	void delete(MemberVO member) throws Exception;
+	void deleteByMemberId(Long memberId) throws Exception;
 	
 }

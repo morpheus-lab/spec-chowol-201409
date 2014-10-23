@@ -15,14 +15,19 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public void checkLogin(MemberVO member) {
-		// TODO Auto-generated method stub
-		dao.read(0L);
+		
 	}
 
 	@Override
-	public void registerMember(MemberVO member) {
-		// TODO Auto-generated method stub
-
+	public void registerMember(MemberVO member) throws Exception {
+		if (member == null) {
+			throw new Exception("MemberVO가 NULL입니다.");
+		}
+		
+		int insertResult = dao.create(member);
+		if (insertResult < 1) {
+			throw new Exception("INSERT 실패");
+		}
 	}
 
 }
