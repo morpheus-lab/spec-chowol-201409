@@ -1,6 +1,7 @@
 package com.bitschool.mentorschool.service;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import com.bitschool.mentorschool.vo.MemberVO;
 public class MemberServiceImpl implements MemberService {
 
 	@Inject
+	@Named("memberDAO-myBatis")
 	private MemberDAO dao;
 	
 	@Override

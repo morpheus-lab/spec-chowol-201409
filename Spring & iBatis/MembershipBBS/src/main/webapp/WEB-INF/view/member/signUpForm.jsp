@@ -5,10 +5,70 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 가입 신청서</title>
+<script type="text/javascript">
+	
+	function checkForm() {
+		if (document.signUpForm.name.value == "") {
+			alert("이름은 필수");
+			document.signUpForm.name.focus();
+			return false;
+		}
+		if (document.signUpForm.gender.value == "") {
+			alert("성별 선택은 필수");
+			document.signUpForm.gender[2].focus();
+			return false;
+		}
+		if (document.signUpForm.email.value == "") {
+			alert("이메일은 필수");
+			document.signUpForm.email.focus();
+			return false;
+		}
+		if (document.signUpForm.id.value == "") {
+			alert("아이디는 필수");
+			document.signUpForm.id.focus();
+			return false;
+		}
+		if (document.signUpForm.pw.value == "") {
+			alert("비밀번호는 필수");
+			document.signUpForm.pw.focus();
+			return false;
+		}
+		if (document.signUpForm.pwConfirm.value == "") {
+			alert("비밀번호 확인은 필수");
+			document.signUpForm.pwConfirm.focus();
+			return false;
+		}
+		if (document.signUpForm.pw.value != document.signUpForm.pwConfirm.value) {
+			alert("비밀번호와 비밀번호 확인이 일치하지 않음");
+			document.signUpForm.pwConfirm.focus();
+			return false;
+		}
+		var hasTelNum = false;
+		var hasCelNum = false;
+		if (document.signUpForm.telAreaCode.value != "" &&
+				document.signUpForm.tel1.value != "" &&
+				document.signUpForm.tel2.value != "") {
+			hasTelNum = true;
+		}
+		if (document.signUpForm.cellAreaCode.value != "" &&
+				document.signUpForm.cell1.value != "" &&
+				document.signUpForm.cell2.value != "") {
+			hasCelNum = true;
+		}
+		if (!hasTelNum && !hasCelNum) {
+			alert("전화번호/휴대전화 둘 중 하나는 필수");
+			document.signUpForm.cellAreaCode.focus();
+			return false;
+		}
+		
+		return true;
+	}
+	
+</script>
 </head>
 <body>
 
-<form name="signUpForm" action="/signup" method="post">
+<form name="signUpForm" action="/signup" method="post" onsubmit="return checkForm()">
 
 	<table>
 		<tr>
