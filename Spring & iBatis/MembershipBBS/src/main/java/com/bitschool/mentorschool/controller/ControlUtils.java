@@ -22,7 +22,7 @@ public class ControlUtils {
 			HttpServletResponse response) throws IOException {
 		// 로그인 체크
 		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("member.id") == null) {
+		if (session == null || session.getAttribute("member") == null) {
 			// 로그인 되지 않은 상태
 			response.sendRedirect(request.getContextPath() + "/login?redirect="
 					+ request.getRequestURI());
@@ -37,7 +37,7 @@ public class ControlUtils {
 			String redirectUrl) throws IOException {
 		// 로그인 체크
 		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("member.id") == null) {
+		if (session == null || session.getAttribute("member") == null) {
 			// 로그인 되지 않은 상태
 			response.sendRedirect(request.getContextPath() + "/login?redirect="
 					+ redirectUrl);

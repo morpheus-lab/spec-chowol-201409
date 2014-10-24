@@ -11,7 +11,9 @@
 <body>
 
 <form name="modifyForm" action="<%= request.getContextPath() %>/member/mypage/modify"
-	method="post" onsubmit="return checkForm()">
+	method="post">
+
+	<input type="hidden" name="memberId" value="${member.memberId}" />
 
 	<table>
 		<tr>

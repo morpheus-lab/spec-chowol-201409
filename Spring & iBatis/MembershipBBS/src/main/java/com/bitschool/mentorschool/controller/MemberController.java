@@ -76,8 +76,6 @@ public class MemberController {
 			if (storedMember != null) {	// 로그인 성공시
 				// 세션에 id와 name 저장
 				HttpSession session = request.getSession();
-				session.setAttribute("member.id", storedMember.getId());
-				session.setAttribute("member.name", storedMember.getName());
 				session.setAttribute("member", storedMember);
 				
 				if (saveId != null) {	// "아이디 저장" 선택시
@@ -126,17 +124,22 @@ public class MemberController {
 	public ModelAndView showMyPage(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		
+		if (ControlUtils.authAndRedirect(request, response)) {
+			HttpSession session = request.getSession();
+			return new ModelAndView("member/mypage", "member", session.getAttribute("member"));
+		} else {
+			return null;
+		}
+		/*
 		HttpSession session = request.getSession();
 		
-		if (session.getAttribute("member.id") != null) {	// 로그인 상태
+		if (session.getAttribute("member") != null) {	// 로그인 상태
 			return new ModelAndView("member/mypage", "member", session.getAttribute("member"));
-			
 		} else {	// 로그아웃 상태
 			response.sendRedirect(request.getContextPath() + "/login?redirect=/member/mypage");
 			return null;
-			
 		}
-		
+		*/
 	}
 	
 	@RequestMapping(value="/member/mypage/{task}")
@@ -159,11 +162,19 @@ public class MemberController {
 				return new ModelAndView("member/modifyForm", "member", member);
 			} else if (request.getMethod().equals("POST")) {
 				// 서비스를 통해 회원 정보 수정
-				
+				try {
+					MemberVO modifiedMember = service.modifyMember(member);
+					HttpSession session = request.getSession();
+					session.setAttribute("member", modifiedMember);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				// mypage로 이동시킴
-				
+				response.sendRedirect(request.getContextPath() + "/member/mypage");
+				return null;
 			} else {
-				
+				response.sendRedirect(request.getContextPath() + "/member/mypage");
+				return null;
 			}
 		}
 		else if (task.equals("leave")) {

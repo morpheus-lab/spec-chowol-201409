@@ -27,7 +27,7 @@ public class AdminController {
 			HttpServletResponse response) throws IOException {
 		// 로그인 여부 체크
 		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("member.id") == null) {
+		if (session == null || session.getAttribute("member") == null) {
 			response.sendRedirect(request.getContextPath() + "/login?redirect=/admin/members");
 			return null;
 		}

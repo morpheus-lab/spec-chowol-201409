@@ -55,8 +55,7 @@
 		       tel2=#{tel2},
 		       cellAreaCode=#{cellAreaCode},
 		       cell1=#{cell1},
-		       cell2=#{cell2},
-		       regDate=#{regDate}
+		       cell2=#{cell2}
 		WHERE  memberId=#{memberId}
 	</update>
 	
