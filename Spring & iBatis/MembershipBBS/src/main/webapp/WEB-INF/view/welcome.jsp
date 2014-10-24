@@ -15,15 +15,15 @@
 String memberId = (String) session.getAttribute("member.id");
 String memberName = (String) session.getAttribute("member.name");
 %>
+<a href="<%= request.getContextPath() %>/member/mypage">마이페이지</a><br/>
 <%
-if (memberId == null) {
+if (memberId == null) {	// 로그인 하지 않은 상태
 %>
 	<a href="<%= request.getContextPath() %>/signup">회원가입</a><br/>
 	<a href="<%= request.getContextPath() %>/login">로그인</a>
 <%
-} else {
+} else {	// 이미 로그인 한 상태
 %>
-	<a href="<%= request.getContextPath() %>/member/mypage">마이페이지</a><br/>
 	<a href="<%= request.getContextPath() %>/logout">로그아웃</a>
 <%
 }

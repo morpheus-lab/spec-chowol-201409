@@ -88,9 +88,12 @@ public class MemberController {
 					cookie.setMaxAge(0);
 					response.addCookie(cookie);
 				}
+				// redirect 파라미터가 존재하고, 빈 스트링 값이 아닌 경우
 				if (redirect != null && !redirect.trim().equals("")) {
 					response.sendRedirect(request.getContextPath() + redirect);
-				} else {
+				}
+				// redirect 파라미터가 존재하지 않거나, 빈 스트링 값인 경우
+				else {
 					response.sendRedirect(request.getContextPath() + "/");
 				}
 				return null;
