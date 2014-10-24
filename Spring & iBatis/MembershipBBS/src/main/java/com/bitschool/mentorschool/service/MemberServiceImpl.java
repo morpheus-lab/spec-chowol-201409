@@ -16,8 +16,8 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDAO dao;
 	
 	@Override
-	public void checkLogin(MemberVO member) {
-		
+	public MemberVO checkLogin(MemberVO member) throws Exception {
+		return dao.read(member);
 	}
 
 	@Override

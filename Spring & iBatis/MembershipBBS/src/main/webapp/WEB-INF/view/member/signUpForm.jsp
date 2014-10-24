@@ -68,7 +68,7 @@
 </head>
 <body>
 
-<form name="signUpForm" action="/signup" method="post" onsubmit="return checkForm()">
+<form name="signUpForm" action="<%= request.getContextPath() %>/signup" method="post" onsubmit="return checkForm()">
 
 	<table>
 		<tr>

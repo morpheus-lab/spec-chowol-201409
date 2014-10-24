@@ -25,6 +25,11 @@ public class MemberDAOImplMyBatis implements MemberDAO {
 	}
 
 	@Override
+	public MemberVO read(MemberVO member) {
+		return sqlSession.selectOne("selectMember", member);
+	}
+	
+	@Override
 	public MemberVO readById(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return null;

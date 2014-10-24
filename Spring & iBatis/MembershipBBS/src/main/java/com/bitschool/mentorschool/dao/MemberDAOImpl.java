@@ -78,6 +78,11 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public MemberVO read(MemberVO member) {
+		return null;
+	}
+	
+	@Override
 	public MemberVO readById(String id) {
 		// TODO Auto-generated method stub
 		return null;

@@ -30,10 +30,12 @@
 		)
 	</insert>
 	
-	<!-- <select id=""></select>
-	
-	<update id=""></update>
-	
-	<delete id=""></delete> -->
+	<select id="selectMember" parameterType="com.bitschool.mentorschool.vo.MemberVO"
+		resultType="com.bitschool.mentorschool.vo.MemberVO">
+		SELECT *
+		FROM member
+		WHERE id=#{id}
+		  AND pw=#{pw}
+	</select>
 	
 </mapper>

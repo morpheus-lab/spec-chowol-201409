@@ -7,6 +7,7 @@ public interface MemberDAO {
 	int create(MemberVO member) throws Exception;
 	
 	MemberVO read(Long memberId) throws Exception;
+	MemberVO read(MemberVO member) throws Exception;
 	MemberVO readById(String id) throws Exception;
 	MemberVO readByEmail(String email) throws Exception;
 	
