@@ -1,6 +1,7 @@
 package com.bitschool.mentorschool.vo;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class MemberVO implements Serializable {
 	
@@ -16,6 +17,7 @@ public class MemberVO implements Serializable {
 	private String cellAreaCode;
 	private String cell1;
 	private String cell2;
+	private Date regDate;
 	
 	public Long getMemberId() {
 		return memberId;
@@ -88,6 +90,12 @@ public class MemberVO implements Serializable {
 	}
 	public void setCell2(String cell2) {
 		this.cell2 = cell2;
+	}
+	public Date getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
 	
 	public String toString() {

@@ -11,8 +11,22 @@
 어서오세요~<br/>
 <br/>
 <br/>
-<a href="<%= request.getContextPath() %>/signup">회원가입</a><br/>
-<a href="<%= request.getContextPath() %>/login">로그인</a>
-
+<%
+String memberId = (String) session.getAttribute("member.id");
+String memberName = (String) session.getAttribute("member.name");
+%>
+<%
+if (memberId == null) {
+%>
+	<a href="<%= request.getContextPath() %>/signup">회원가입</a><br/>
+	<a href="<%= request.getContextPath() %>/login">로그인</a>
+<%
+} else {
+%>
+	<a href="<%= request.getContextPath() %>/member/mypage">마이페이지</a><br/>
+	<a href="<%= request.getContextPath() %>/logout">로그아웃</a>
+<%
+}
+%>
 </body>
 </html>

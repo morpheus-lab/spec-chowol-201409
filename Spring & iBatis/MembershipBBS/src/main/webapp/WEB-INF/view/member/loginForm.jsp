@@ -19,13 +19,15 @@ if (cookies != null) {
 		}
 	}
 }
+
+String redirect = request.getParameter("redirect");
 %>
 
 <h3>로그인</h3>
 
 <font color="red">${loginMessage}</font><br/>
 
-<form name="loginForm" action="login" method="post">
+<form name="loginForm" action="login<%= redirect != null ? "?redirect=" + redirect : "" %>" method="post">
 
 	<table>
 		<tr>

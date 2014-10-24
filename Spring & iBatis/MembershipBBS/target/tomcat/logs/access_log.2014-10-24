@@ -1,0 +1,5 @@
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:11:39:25 +0900] "GET / HTTP/1.1" 200 390 http-bio-8080-exec-1 625
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:11:39:29 +0900] "GET /member/mypage HTTP/1.1" 302 - http-bio-8080-exec-3 7
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:11:39:29 +0900] "GET /login?redirect=/member/mypage HTTP/1.1" 200 818 http-bio-8080-exec-4 103
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:11:39:42 +0900] "POST /login?redirect=/member/mypage HTTP/1.1" 302 - http-bio-8080-exec-5 427
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:11:39:42 +0900] "GET /member/mypage HTTP/1.1" 200 726 http-bio-8080-exec-6 68
