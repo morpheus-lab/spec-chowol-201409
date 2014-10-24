@@ -95,21 +95,21 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void update(MemberVO member) {
+	public int update(MemberVO member) {
 		// TODO Auto-generated method stub
-
+		return 0;
 	}
 
 	@Override
-	public void delete(MemberVO member) {
+	public int delete(MemberVO member) {
 		// TODO Auto-generated method stub
-
+		return 0;
 	}
 
 	@Override
-	public void deleteByMemberId(Long memberId) {
+	public int deleteByMemberId(Long memberId) {
 		// TODO Auto-generated method stub
-
+		return 0;
 	}
 
 }

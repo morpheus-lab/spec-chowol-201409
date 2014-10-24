@@ -18,6 +18,7 @@ public class MemberVO implements Serializable {
 	private String cell1;
 	private String cell2;
 	private Date regDate;
+	private Integer level;
 	
 	public Long getMemberId() {
 		return memberId;
@@ -96,6 +97,12 @@ public class MemberVO implements Serializable {
 	}
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
+	}
+	public Integer getLevel() {
+		return level;
+	}
+	public void setLevel(Integer level) {
+		this.level = level;
 	}
 	
 	public String toString() {

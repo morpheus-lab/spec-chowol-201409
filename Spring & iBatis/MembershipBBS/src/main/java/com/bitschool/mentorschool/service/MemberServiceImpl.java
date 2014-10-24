@@ -36,4 +36,12 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
+	@Override
+	public MemberVO modifyMember(MemberVO member) throws Exception {
+		// DAO에게 update를 시킴
+		dao.update(member);
+		// 업데이트 된 MemberVO 객체를 리턴
+		return member;
+	}
+
 }

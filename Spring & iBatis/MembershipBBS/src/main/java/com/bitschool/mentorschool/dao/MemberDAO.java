@@ -11,9 +11,9 @@ public interface MemberDAO {
 	MemberVO readById(String id) throws Exception;
 	MemberVO readByEmail(String email) throws Exception;
 	
-	void update(MemberVO member) throws Exception;
+	int update(MemberVO member) throws Exception;
 	
-	void delete(MemberVO member) throws Exception;
-	void deleteByMemberId(Long memberId) throws Exception;
+	int delete(MemberVO member) throws Exception;
+	int deleteByMemberId(Long memberId) throws Exception;
 	
 }

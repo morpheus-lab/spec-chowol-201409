@@ -8,4 +8,6 @@ public interface MemberService {
 	
 	void registerMember(MemberVO member) throws Exception;
 	
+	MemberVO modifyMember(MemberVO member) throws Exception;
+	
 }

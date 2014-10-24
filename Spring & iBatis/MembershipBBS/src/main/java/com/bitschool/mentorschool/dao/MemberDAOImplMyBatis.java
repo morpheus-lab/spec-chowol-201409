@@ -42,21 +42,20 @@ public class MemberDAOImplMyBatis implements MemberDAO {
 	}
 
 	@Override
-	public void update(MemberVO member) throws Exception {
-		// TODO Auto-generated method stub
-
+	public int update(MemberVO member) throws Exception {
+		return sqlSession.update("updateMember", member);
 	}
 
 	@Override
-	public void delete(MemberVO member) throws Exception {
+	public int delete(MemberVO member) throws Exception {
 		// TODO Auto-generated method stub
-
+		return 0;
 	}
 
 	@Override
-	public void deleteByMemberId(Long memberId) throws Exception {
+	public int deleteByMemberId(Long memberId) throws Exception {
 		// TODO Auto-generated method stub
-
+		return 0;
 	}
 
 }

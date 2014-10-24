@@ -41,5 +41,9 @@
 		</tr>
 	</table>
 	
+	<br/>
+	
+	<a href="<%= request.getContextPath() %>/member/mypage/modify">회원 정보 수정</a>
+	
 </body>
 </html>

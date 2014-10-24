@@ -38,4 +38,41 @@
 		  AND pw=#{pw}
 	</select>
 	
+	<select id="selectMemberList" resultType="com.bitschool.mentorschool.vo.MemberVO">
+		SELECT *
+		FROM   member
+	</select>
+	
+	<update id="updateMember" parameterType="com.bitschool.mentorschool.vo.MemberVO">
+		UPDATE member
+		SET    name=#{name},
+		       email=#{email},
+		       gender=#{gender},
+		       id=#{id},
+		       pw=#{pw},
+		       telAreaCode=#{telAreaCode},
+		       tel1=#{tel1},
+		       tel2=#{tel2},
+		       cellAreaCode=#{cellAreaCode},
+		       cell1=#{cell1},
+		       cell2=#{cell2},
+		       regDate=#{regDate}
+		WHERE  memberId=#{memberId}
+	</update>
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

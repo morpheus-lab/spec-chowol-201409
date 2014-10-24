@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -128,17 +129,48 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		
 		if (session.getAttribute("member.id") != null) {	// 로그인 상태
-			
 			return new ModelAndView("member/mypage", "member", session.getAttribute("member"));
 			
 		} else {	// 로그아웃 상태
-			
 			response.sendRedirect(request.getContextPath() + "/login?redirect=/member/mypage");
-			
 			return null;
 			
 		}
 		
+	}
+	
+	@RequestMapping(value="/member/mypage/{task}")
+	public ModelAndView modifyMyInfo(
+			@PathVariable String task,
+			@ModelAttribute MemberVO member,
+			HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		
+		//	로그인 체크
+		if (!ControlUtils.authAndRedirect(request, response)) {
+			// 로그인 되지 않은 상태
+			return null;
+		}
+		
+		if (task.equals("modify")) {
+			if (request.getMethod().equals("GET")) {
+				HttpSession session = request.getSession();
+				member = (MemberVO) session.getAttribute("member");
+				return new ModelAndView("member/modifyForm", "member", member);
+			} else if (request.getMethod().equals("POST")) {
+				// 서비스를 통해 회원 정보 수정
+				
+				// mypage로 이동시킴
+				
+			} else {
+				
+			}
+		}
+		else if (task.equals("leave")) {
+			
+		}
+		
+		return null;
 	}
 	
 }
