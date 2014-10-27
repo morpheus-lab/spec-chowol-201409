@@ -109,6 +109,7 @@ public class MemberVO implements Serializable {
 		return "memberId: " + memberId +
 				", name: " + name +
 				", id: " + id +
+				", pw: " + pw +
 				", email: " + email;
 	}
 	

@@ -104,7 +104,7 @@
 			<td colspan="2" align="center">
 				<input type="submit" value="정보 수정" />
 				<input type="reset" value="입력 초기화" />
-				<input type="button" value="수정 취소" />
+				<input type="button" value="수정 취소" onclick="history.back();" />
 			</td>
 		</tr>
 	</table>

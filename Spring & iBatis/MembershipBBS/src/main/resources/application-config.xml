@@ -12,13 +12,4 @@
     
     <bean id="logAdvice" class="com.bitschool.mentorschool.aop.LogAdvice"></bean>
     
-    <aop:config>
-    	<aop:aspect ref="logAdvice">
-    		<aop:before method="printLog"
-    			pointcut="execution(* com.bitschool.mentorschool.dao.MemberDAO.*(..))" />
-    		<aop:around method="printTime"
-    			pointcut="execution(* com.bitschool.mentorschool.dao.MemberDAO.*(..))" />
-    	</aop:aspect>
-    </aop:config>
-    
 </beans>

@@ -20,12 +20,13 @@ public class LogAdvice {
 		long start = System.currentTimeMillis();
 		
 		Object target = pjp.getTarget();
+		String kind = pjp.getKind();
 		
 		Object result = pjp.proceed();	// 대상이 실행
 		
 		long end = System.currentTimeMillis();
 		
-		logger.info(target + "time: " + (end - start));
+		logger.info("target: " + target + ", kind: " + kind + ", time: " + (end - start));
 		
 		return result;
 	}
