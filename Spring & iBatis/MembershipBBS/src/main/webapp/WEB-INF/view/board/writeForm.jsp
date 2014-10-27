@@ -10,7 +10,9 @@
 <body>
 	
 	<form action="<%= request.getContextPath() %>/board/write"
-		method="post" enctype="multipart/form-data">
+		method="post">
+		
+		<input type="hidden" name="p_bno" value="${p_bno}" />
 		
 		<table>
 			<tr>

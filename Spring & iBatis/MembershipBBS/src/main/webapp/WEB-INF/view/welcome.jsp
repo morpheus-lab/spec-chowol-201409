@@ -16,6 +16,8 @@
 
 <a href="<%= request.getContextPath() %>/member/mypage">마이페이지</a><br/>
 
+<a href="<%= request.getContextPath() %>/board/">게시판</a><br/>
+
 <c:if test="${ empty member.id }">
 	<a href="<%= request.getContextPath() %>/signup">회원가입</a><br/>
 	<a href="<%= request.getContextPath() %>/login">로그인</a>
