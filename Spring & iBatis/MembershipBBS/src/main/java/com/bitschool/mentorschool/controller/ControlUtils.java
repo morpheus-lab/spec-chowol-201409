@@ -43,6 +43,7 @@ public class ControlUtils {
 					+ redirectUrl);
 			return false;
 		}
+		
 		return true;
 	}
 	
