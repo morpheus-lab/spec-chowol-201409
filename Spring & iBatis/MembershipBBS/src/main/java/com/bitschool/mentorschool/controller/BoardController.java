@@ -2,6 +2,7 @@ package com.bitschool.mentorschool.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitschool.mentorschool.service.BoardService;
@@ -25,14 +27,28 @@ public class BoardController {
 	@Inject
 	private BoardService service;
 	
-	@RequestMapping(value="/", method=RequestMethod.GET)
-	public ModelAndView showList() {
+	@RequestMapping(value={"/","/list"}, method=RequestMethod.GET)
+	public ModelAndView showList(
+			@RequestParam(required=false, defaultValue="1") int page,
+			@RequestParam(required=false, defaultValue="10") int pageSize
+			) {
 		
-		return null;
+		List<BoardVO> list = null;
+		try {
+			list = service.getBoardList(page, pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			list = null;
+		}
+		
+		return new ModelAndView("board/list", "boardList", list);
 	}
 	
 	@RequestMapping(value="/write", method=RequestMethod.GET)
-	public String showWriteForm() {
+	public String showWriteForm(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		if (!ControlUtils.authAndRedirect(request, response)) {
+			return null;
+		}
 		return "board/writeForm";
 	}
 	
