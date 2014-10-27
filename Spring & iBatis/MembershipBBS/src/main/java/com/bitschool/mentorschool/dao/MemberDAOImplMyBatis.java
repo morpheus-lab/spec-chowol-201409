@@ -26,7 +26,9 @@ public class MemberDAOImplMyBatis implements MemberDAO {
 
 	@Override
 	public MemberVO read(MemberVO member) {
-		return sqlSession.selectOne("selectMember", member);
+		System.out.println("read(MemberVO) 호출~!!");
+//		return sqlSession.selectOne("selectMember", member);
+		return null;
 	}
 	
 	@Override

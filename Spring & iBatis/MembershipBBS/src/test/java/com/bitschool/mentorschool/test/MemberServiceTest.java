@@ -17,9 +17,7 @@ public class MemberServiceTest extends TestConfig {
 	
 	@Test
 	public void testDAO() throws Exception {
-		
 		service.checkLogin(null);
-		
 	}
 	
 }
