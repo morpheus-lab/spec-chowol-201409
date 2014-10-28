@@ -11,11 +11,12 @@ public class BoardVO implements Serializable {
 	private BigInteger bno;
 	private String subject;
 	private String content;
-	private String writer;
+	private BigInteger writer;
+	private String writerName;
 	private Date writedate;
 	private BigInteger hitcount;
 	private BigInteger p_bno;
-	private Integer level;
+	private BigInteger level;
 	
 	public BigInteger getBno() {
 		return bno;
@@ -35,11 +36,17 @@ public class BoardVO implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getWriter() {
+	public BigInteger getWriter() {
 		return writer;
 	}
-	public void setWriter(String writer) {
+	public void setWriter(BigInteger writer) {
 		this.writer = writer;
+	}
+	public String getWriterName() {
+		return writerName;
+	}
+	public void setWriterName(String writerName) {
+		this.writerName = writerName;
 	}
 	public Date getWritedate() {
 		return writedate;
@@ -59,10 +66,10 @@ public class BoardVO implements Serializable {
 	public void setP_bno(BigInteger p_bno) {
 		this.p_bno = p_bno;
 	}
-	public Integer getLevel() {
+	public BigInteger getLevel() {
 		return level;
 	}
-	public void setLevel(Integer level) {
+	public void setLevel(BigInteger level) {
 		this.level = level;
 	}
 	

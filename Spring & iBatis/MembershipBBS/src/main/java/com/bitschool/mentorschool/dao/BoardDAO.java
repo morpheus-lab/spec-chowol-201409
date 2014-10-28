@@ -11,7 +11,7 @@ public interface BoardDAO {
 	
 	BoardVO select(BigInteger bno);
 	
-	List<BoardVO> selectList(int page, int pageSize);
+	List<BoardVO> selectList(Integer page, Integer pageSize);
 	
 	int update(BoardVO board);
 	

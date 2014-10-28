@@ -8,7 +8,7 @@ import com.bitschool.mentorschool.vo.BoardVO;
 
 public interface BoardService {
 	
-	Map<String, Object> getBoardList(int page, int pageSize) throws Exception;	// getBoardList(1, 15);
+	Map<String, Object> getBoardList(Integer page, Integer pageSize) throws Exception;	// getBoardList(1, 15);
 	
 	BoardVO read(BigInteger bno) throws Exception;
 	

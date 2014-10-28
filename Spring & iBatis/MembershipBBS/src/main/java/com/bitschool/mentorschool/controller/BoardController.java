@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -33,8 +32,8 @@ public class BoardController {
 	
 	@RequestMapping(value={"/","/list"}, method=RequestMethod.GET)
 	public ModelAndView showList(
-			@RequestParam(required=false, defaultValue="1") int page,
-			@RequestParam(required=false, defaultValue="10") int pageSize
+			@RequestParam(required=false, defaultValue="1") Integer page,
+			@RequestParam(required=false, defaultValue="10") Integer pageSize
 			) {
 		
 		Map<String, Object> models = null;
@@ -84,19 +83,17 @@ public class BoardController {
 		
 		HttpSession session = request.getSession(false);
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		String userName = member.getName();
 		
 		if (board == null) {
 			isSuccess = false;
 			alertMessage = "잘못된 접근!";
 		}
 		else {
-			board.setWriter(userName);
+			board.setWriter(new BigInteger(member.getMemberId().toString()));
 			
 			int writeResult = 0;
 			
 			try {
-				board.setWriter("" + member.getMemberId());
 				writeResult = service.write(board);
 			} catch (Exception e) {
 				e.printStackTrace();

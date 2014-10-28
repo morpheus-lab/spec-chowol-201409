@@ -29,7 +29,7 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> selectList(int page, int pageSize) {
+	public List<BoardVO> selectList(Integer page, Integer pageSize) {
 		Map<String, Integer> params = new Hashtable<String, Integer>();
 		params.put("page", page);
 		params.put("pageSize", pageSize);

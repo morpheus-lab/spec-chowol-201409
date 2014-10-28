@@ -9,6 +9,7 @@
 		<result column="SUBJECT" property="subject" />
 		<result column="CONTENT" property="content" />
 		<result column="WRITER" property="writer" />
+		<result column="WRITERNAME" property="writerName" />
 		<result column="WRITEDATE" property="writedate" />
 		<result column="HITCOUNT" property="hitcount" />
 		<result column="P_BNO" property="p_bno" />
@@ -22,15 +23,21 @@
 			SELECT seq_board_bno.NEXTVAL FROM dual
 		</selectKey>
 		
-		INSERT INTO board (BNO,SUBJECT,CONTENT,WRITER,WRITEDATE,HITCOUNT,P_BNO)
+		INSERT INTO board (BNO,SUBJECT,CONTENT,WRITER,WRITEDATE,HITCOUNT
+		<if test="p_bno != null and p_bno != ''">
+			,P_BNO
+		</if>
+		)
 		VALUES (
 			#{bno},
 			#{subject},
 			#{content},
 			#{writer},
 			SYSDATE,
-			0,
-			#{p_bno}
+			0
+		<if test="p_bno != null and p_bno != ''">
+			,#{p_bno}
+		</if>
 		)
 	</insert>
 	
@@ -38,19 +45,19 @@
 		parameterType="java.util.Map"
 		resultMap="boardMap">
 		<![CDATA[
-			SELECT t.*
-			FROM (
-			  SELECT  /*+ INDEX_DESC (b BOARD_PK_BNO) */
-			          rownum rnum, level, b.bno, b.subject, b.content,
-			          m.name writer, b.writedate, b.hitcount, b.p_bno
-			  FROM    board b,
-			          member m
-			  WHERE   b.writer = m.memberid(+)
-			  START WITH b.p_bno IS NULL
-			  CONNECT BY PRIOR b.bno = b.p_bno
-			  ORDER SIBLINGS BY b.bno DESC
+			SELECT  *
+			FROM    (
+			        SELECT  /*+ INDEX_DESC (b BOARD_PK_BNO) */
+			                rownum rnum, level, b.bno, b.subject, b.content,
+			                m.name writername, m.memberid writer, b.writedate, b.hitcount, b.p_bno
+			        FROM    board b,
+			                member m
+			        WHERE   b.writer = m.memberid(+)
+			        START WITH b.p_bno IS NULL
+			        CONNECT BY PRIOR b.bno = b.p_bno
+			        ORDER SIBLINGS BY b.bno DESC
 			) t
-			WHERE   rnum >= (#{page} - 1) * #{pageSize} + 1
+			WHERE   rnum >= ( #{page} - 1 ) * #{pageSize} + 1
 			  AND   rnum <= #{page} * #{pageSize}
 		]]>
 	</select>
@@ -59,7 +66,7 @@
 			parameterType="java.math.BigInteger"
 			resultMap="boardMap">
 		SELECT b.bno, b.subject, b.content,
-		       m.name writer, b.writedate, b.hitcount, b.p_bno
+		       m.name writername, m.memberid writer, b.writedate, b.hitcount, b.p_bno
 		FROM   board b,
 		       member m
 		WHERE  b.bno = #{value}
