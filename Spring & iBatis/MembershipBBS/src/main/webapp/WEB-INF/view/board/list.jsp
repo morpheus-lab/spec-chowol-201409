@@ -30,7 +30,7 @@
 	<c:forEach var="board" items="${models.boardList}">
 		<tr>
 			<td>${board.bno}</td>
-			<td><a href="<%= request.getContextPath() %>/board/read/${board.bno}">${board.subject}</a></td>
+			<td><c:forEach begin="2" end="${board.level}">&nbsp;&nbsp;</c:forEach><a href="<%= request.getContextPath() %>/board/read/${board.bno}">${board.subject}</a></td>
 			<td>${board.writer}</td>
 			<td>${board.writedate}</td>
 			<td>${board.hitcount}</td>
@@ -52,10 +52,16 @@ Map<String, Object> models = (Map<String, Object>) request.getAttribute("models"
 int currentPage = (Integer) models.get("currentPage");
 int totalPages = (Integer) models.get("totalPages");
 int block = (currentPage - 1) / 10;
+Integer pageSize = 0;
+try {
+	pageSize = Integer.parseInt(request.getParameter("pageSize"));
+} catch (NumberFormatException e) {
+	pageSize = 10;
+}
 
 if (currentPage > 1) {
 %>
-	<a href="<%= request.getContextPath() %>/board/?pageSize=<%= request.getParameter("pageSize") %>&page=1">처음</a>
+	<a href="<%= request.getContextPath() %>/board/?pageSize=<%= pageSize %>&page=1">처음</a>
 <%
 }
 
@@ -63,14 +69,14 @@ if (currentPage > 1) {
 boolean prevBlock = block > 0;
 if (prevBlock) {
 %>
-	<a href="<%= request.getContextPath() %>/board/?pageSize=<%= request.getParameter("pageSize") %>&page=<%= block * 10 %>">이전</a>
+	<a href="<%= request.getContextPath() %>/board/?pageSize=<%= pageSize %>&page=<%= block * 10 %>">이전</a>
 <%
 }
 
 for (int i = block * 10 + 1; i <= (block + 1) * 10 && i <= totalPages; i++) {
 	if (i != currentPage) {
 %>
-		<a href="<%= request.getContextPath() %>/board/?pageSize=<%= request.getParameter("pageSize") %>&page=<%= i %>"><%= i %></a>
+		<a href="<%= request.getContextPath() %>/board/?pageSize=<%= pageSize %>&page=<%= i %>"><%= i %></a>
 <%
 	} else {
 %>
@@ -82,16 +88,21 @@ int totalBlocks = (totalPages - 1) / 10 + 1;
 boolean nextBlock = block < totalBlocks - 1;
 if (nextBlock) {
 %>
-		<a href="<%= request.getContextPath() %>/board/?pageSize=<%= request.getParameter("pageSize") %>&page=<%= (block + 1) * 10 + 1 %>">다음</a>
+		<a href="<%= request.getContextPath() %>/board/?pageSize=<%= pageSize %>&page=<%= (block + 1) * 10 + 1 %>">다음</a>
 <%
 }
 
 if (currentPage < totalPages) {
 %>
-<a href="<%= request.getContextPath() %>/board/?pageSize=<%= request.getParameter("pageSize") %>&page=<%= totalPages %>">마지막</a>
+<a href="<%= request.getContextPath() %>/board/?pageSize=<%= pageSize %>&page=<%= totalPages %>">마지막</a>
 <%
 }
 %>
+
+<br/>
+
+<input type="button" value="글쓰기" onclick="location.href='<%= request.getContextPath() %>/board/write';" />
+
 </body>
 </html>
 

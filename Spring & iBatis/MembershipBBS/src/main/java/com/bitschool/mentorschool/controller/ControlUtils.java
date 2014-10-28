@@ -1,6 +1,7 @@
 package com.bitschool.mentorschool.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +26,7 @@ public class ControlUtils {
 		if (session == null || session.getAttribute("member") == null) {
 			// 로그인 되지 않은 상태
 			response.sendRedirect(request.getContextPath() + "/login?redirect="
-					+ request.getRequestURI());
+					+ URLEncoder.encode(request.getRequestURI(), "UTF-8"));
 			return false;
 		}
 		return true;
@@ -40,7 +41,7 @@ public class ControlUtils {
 		if (session == null || session.getAttribute("member") == null) {
 			// 로그인 되지 않은 상태
 			response.sendRedirect(request.getContextPath() + "/login?redirect="
-					+ redirectUrl);
+					+ URLEncoder.encode(redirectUrl, "UTF-8"));
 			return false;
 		}
 		

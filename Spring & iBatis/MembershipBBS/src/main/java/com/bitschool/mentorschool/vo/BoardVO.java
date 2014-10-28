@@ -15,6 +15,7 @@ public class BoardVO implements Serializable {
 	private Date writedate;
 	private BigInteger hitcount;
 	private BigInteger p_bno;
+	private Integer level;
 	
 	public BigInteger getBno() {
 		return bno;
@@ -57,6 +58,12 @@ public class BoardVO implements Serializable {
 	}
 	public void setP_bno(BigInteger p_bno) {
 		this.p_bno = p_bno;
+	}
+	public Integer getLevel() {
+		return level;
+	}
+	public void setLevel(Integer level) {
+		this.level = level;
 	}
 	
 }

@@ -12,6 +12,7 @@
 		<result column="WRITEDATE" property="writedate" />
 		<result column="HITCOUNT" property="hitcount" />
 		<result column="P_BNO" property="p_bno" />
+		<result column="LEVEL" property="level" />
 	</resultMap>
 	
 	<insert id="insertBoard"
@@ -29,7 +30,7 @@
 			#{writer},
 			SYSDATE,
 			0,
-			NULL
+			#{p_bno}
 		)
 	</insert>
 	
@@ -39,9 +40,15 @@
 		<![CDATA[
 			SELECT t.*
 			FROM (
-			  SELECT  /*+ INDEX_DESC (BOARD BOARD_PK_BNO) */
-			          rownum rnum, board.*
-			  FROM    board
+			  SELECT  /*+ INDEX_DESC (b BOARD_PK_BNO) */
+			          rownum rnum, level, b.bno, b.subject, b.content,
+			          m.name writer, b.writedate, b.hitcount, b.p_bno
+			  FROM    board b,
+			          member m
+			  WHERE   b.writer = m.memberid(+)
+			  START WITH b.p_bno IS NULL
+			  CONNECT BY PRIOR b.bno = b.p_bno
+			  ORDER SIBLINGS BY b.bno DESC
 			) t
 			WHERE   rnum >= (#{page} - 1) * #{pageSize} + 1
 			  AND   rnum <= #{page} * #{pageSize}
@@ -51,9 +58,12 @@
 	<select id="selectBoardByBno"
 			parameterType="java.math.BigInteger"
 			resultMap="boardMap">
-		SELECT *
-		FROM   board
-		WHERE  bno = #{value}
+		SELECT b.bno, b.subject, b.content,
+		       m.name writer, b.writedate, b.hitcount, b.p_bno
+		FROM   board b,
+		       member m
+		WHERE  b.bno = #{value}
+		  AND  b.writer = m.memberid(+)
 	</select>
 	
 	<select id="getTotalPages"
@@ -62,6 +72,14 @@
 		SELECT (COUNT(*) - 1) / #{pageSize} + 1
 		FROM   board
 	</select>
+	
+	<update id="updateBoard"
+		parameterType="com.bitschool.mentorschool.vo.BoardVO">
+		UPDATE board
+		SET    subject = #{subject},
+		       content = #{content}
+		WHERE  bno = #{bno}
+	</update>
 	
 </mapper>
 

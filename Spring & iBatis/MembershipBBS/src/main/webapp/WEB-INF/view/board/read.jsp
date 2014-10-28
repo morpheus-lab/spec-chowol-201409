@@ -35,5 +35,10 @@
 	</tr>
 </table>
 
+<input type="button" value="목록" onclick="history.back()" />
+<input type="button" value="댓글달기" onclick="location.href='<%= request.getContextPath() %>/board/write?p_bno=${board.bno}';" />
+<input type="button" value="수정" onclick="location.href='<%= request.getContextPath() %>/board/modify?bno=${board.bno}';"/>
+<input type="button" value="삭제" />
+
 </body>
 </html>

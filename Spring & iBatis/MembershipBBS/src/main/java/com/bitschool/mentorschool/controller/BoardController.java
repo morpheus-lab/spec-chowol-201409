@@ -50,11 +50,26 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/write", method=RequestMethod.GET)
-	public String showWriteForm(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public ModelAndView showWriteForm(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(required=false, value="p_bno") BigInteger pBno) throws IOException {
 		if (!ControlUtils.authAndRedirect(request, response)) {
 			return null;
 		}
-		return "board/writeForm";
+		BoardVO pBoard = null;
+		if (pBno != null) {
+			try {
+				pBoard = service.read(pBno);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		Map<String, Object> models = new Hashtable<String, Object>();
+		if (pBno != null)
+			models.put("p_bno", pBno);
+		if (pBoard != null)
+			models.put("pBoard", pBoard);
+		
+		return new ModelAndView("board/writeForm", "models", models);
 	}
 	
 	@RequestMapping(value="/write", method=RequestMethod.POST)
@@ -81,6 +96,7 @@ public class BoardController {
 			int writeResult = 0;
 			
 			try {
+				board.setWriter("" + member.getMemberId());
 				writeResult = service.write(board);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -130,6 +146,36 @@ public class BoardController {
 			e.printStackTrace();
 		}
 		return new ModelAndView("board/read", "board", board);
+	}
+	
+	@RequestMapping(value="/modify", method=RequestMethod.GET)
+	public ModelAndView showModifyForm(
+			HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(required=true) BigInteger bno
+			) throws IOException {
+		// 사용자 인증/권한 체크
+		if (ControlUtils.authAndRedirect(request, response, "/board/modify?bno=" + bno)) {
+			BoardVO board = null;
+			try {
+				board = service.read(bno);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return new ModelAndView("board/modifyForm", "board", board);
+		}
+		return null;
+	}
+	
+	@RequestMapping(value="/modify", method=RequestMethod.POST)
+	public void modify(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute BoardVO board) throws IOException {
+		try {
+			service.modify(board);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		response.sendRedirect(request.getContextPath() + "/board/");
 	}
 	
 }
