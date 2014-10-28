@@ -30,7 +30,7 @@
 	<c:forEach var="board" items="${models.boardList}">
 		<tr>
 			<td>${board.bno}</td>
-			<td><c:forEach begin="2" end="${board.level}">&nbsp;&nbsp;</c:forEach><a href="<%= request.getContextPath() %>/board/read/${board.bno}">${board.subject}</a></td>
+			<td><c:forEach begin="2" end="${board.level}">&nbsp;&nbsp;</c:forEach><c:if test="${board.level > 1}"><img src="<%= request.getContextPath() %>/images/indent_arrow.gif" border="0" /></c:if><a href="<%= request.getContextPath() %>/board/read/${board.bno}">${board.subject}</a></td>
 			<td>${board.writer}</td>
 			<td>${board.writedate}</td>
 			<td>${board.hitcount}</td>

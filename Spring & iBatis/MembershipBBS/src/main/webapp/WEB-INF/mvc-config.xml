@@ -15,6 +15,7 @@
     <mvc:annotation-driven />
     
     <mvc:resources location="/WEB-INF/view/style/**" mapping="/style/**"/>
+    <mvc:resources location="/images/**" mapping="/images/**"/>
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
