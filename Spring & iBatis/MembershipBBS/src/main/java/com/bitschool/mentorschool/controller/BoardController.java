@@ -2,7 +2,10 @@ package com.bitschool.mentorschool.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,15 +37,16 @@ public class BoardController {
 			@RequestParam(required=false, defaultValue="10") int pageSize
 			) {
 		
-		List<BoardVO> list = null;
+		Map<String, Object> models = null;
 		try {
-			list = service.getBoardList(page, pageSize);
+			models = service.getBoardList(page, pageSize);
+			models.put("currentPage", page);
 		} catch (Exception e) {
 			e.printStackTrace();
-			list = null;
+			models = null;
 		}
 		
-		return new ModelAndView("board/list", "boardList", list);
+		return new ModelAndView("board/list", "models", models);
 	}
 	
 	@RequestMapping(value="/write", method=RequestMethod.GET)
@@ -110,4 +115,47 @@ public class BoardController {
 		}
 	}
 	
+	@RequestMapping(value="/read/{bno}")
+	public ModelAndView read(
+			HttpServletRequest request, HttpServletResponse response,
+			@PathVariable BigInteger bno
+			) {
+		if (bno == null) {
+			return null;
+		}
+		BoardVO board = null;
+		try {
+			board = service.read(bno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("board/read", "board", board);
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

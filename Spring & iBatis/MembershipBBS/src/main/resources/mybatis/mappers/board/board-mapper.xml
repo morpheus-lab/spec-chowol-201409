@@ -48,6 +48,21 @@
 		]]>
 	</select>
 	
+	<select id="selectBoardByBno"
+			parameterType="java.math.BigInteger"
+			resultMap="boardMap">
+		SELECT *
+		FROM   board
+		WHERE  bno = #{value}
+	</select>
+	
+	<select id="getTotalPages"
+			parameterType="int"
+			resultType="int">
+		SELECT COUNT(*) / #{pageSize} + 1
+		FROM   board
+	</select>
+	
 </mapper>
 
 

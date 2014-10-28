@@ -52,4 +52,36 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.delete("deleteBoardByBno", bno);
 	}
 
+	@Override
+	public int getTotalPages(int pageSize) {
+		return sqlSession.selectOne("getTotalPages", pageSize);
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

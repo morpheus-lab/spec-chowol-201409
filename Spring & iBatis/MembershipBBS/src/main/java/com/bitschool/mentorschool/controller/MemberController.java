@@ -26,16 +26,6 @@ public class MemberController {
 	@Inject
 	private MemberService service;
 	
-	@RequestMapping(value="/check")
-	public void injectionTest(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		res.setCharacterEncoding("UTF-8");
-		res.setContentType("text/plain");
-		
-		PrintWriter writer = res.getWriter();
-		writer.append("service = " + service);
-		service.checkLogin(null);
-	}
-	
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
 	public String showSignUpForm() {
 		return "member/signUpForm";

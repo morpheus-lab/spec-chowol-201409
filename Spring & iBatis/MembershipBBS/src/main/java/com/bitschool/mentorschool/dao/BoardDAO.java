@@ -19,4 +19,6 @@ public interface BoardDAO {
 	
 	int deleteByBno(BigInteger bno);
 	
+	int getTotalPages(int pageSize);
+	
 }

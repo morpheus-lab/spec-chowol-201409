@@ -18,18 +18,18 @@
 			<th>날짜</th>
 			<th>조회수</th>
 		</tr>
-<c:if test="${empty boardList}">
+<c:if test="${empty models.boardList}">
 		<tr>
 			<td colspan="5" align="center">
 				조회된 글이 없습니다.
 			</td>
 		</tr>
 </c:if>
-<c:if test="${not empty boardList}">
-	<c:forEach var="board" items="${boardList}">
+<c:if test="${not empty models.boardList}">
+	<c:forEach var="board" items="${models.boardList}">
 		<tr>
 			<td>${board.bno}</td>
-			<td>${board.subject}</td>
+			<td><a href="<%= request.getContextPath() %>/board/read/${board.bno}">${board.subject}</a></td>
 			<td>${board.writer}</td>
 			<td>${board.writedate}</td>
 			<td>${board.hitcount}</td>
@@ -37,6 +37,11 @@
 	</c:forEach>
 </c:if>
 	</table>
+	
+<!-- 페이지 내비게이션 -->
+<c:forEach begin="1" end="${models.totalPages}" var="p" varStatus="status">
+	<c:if test="${p != models.currentPage}"><a href="<%= request.getContextPath() %>/board/?page=${p}"></c:if>${p}<c:if test="${p != models.currentPage}"></a></c:if>
+</c:forEach>
 
 </body>
 </html>

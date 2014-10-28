@@ -1,7 +1,9 @@
 package com.bitschool.mentorschool.service;
 
 import java.math.BigInteger;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -17,8 +19,12 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO dao;
 	
 	@Override
-	public List<BoardVO> getBoardList(int page, int pageSize) throws Exception {
-		return dao.selectList(page, pageSize);
+	public Map<String, Object> getBoardList(int page, int pageSize) throws Exception {
+		Map<String, Object> result = new Hashtable<String, Object>();
+		result.put("boardList", dao.selectList(page, pageSize));
+		result.put("totalPages", dao.getTotalPages(pageSize));
+		
+		return result;
 	}
 
 	@Override
