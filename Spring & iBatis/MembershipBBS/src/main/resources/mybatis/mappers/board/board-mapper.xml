@@ -59,7 +59,7 @@
 	<select id="getTotalPages"
 			parameterType="int"
 			resultType="int">
-		SELECT COUNT(*) / #{pageSize} + 1
+		SELECT (COUNT(*) - 1) / #{pageSize} + 1
 		FROM   board
 	</select>
 	

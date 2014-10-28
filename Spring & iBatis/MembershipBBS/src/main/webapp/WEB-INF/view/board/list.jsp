@@ -1,3 +1,4 @@
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -39,9 +40,73 @@
 	</table>
 	
 <!-- 페이지 내비게이션 -->
-<c:forEach begin="1" end="${models.totalPages}" var="p" varStatus="status">
+<!--
+<c:set var="block" value="${((models.currentPage - 1) - (models.currentPage - 1) % 10) / 10}" />
+<c:forEach begin="${block * 10 + 1}" end="${models.totalPages}" var="p" varStatus="status">
 	<c:if test="${p != models.currentPage}"><a href="<%= request.getContextPath() %>/board/?page=${p}"></c:if>${p}<c:if test="${p != models.currentPage}"></a></c:if>
 </c:forEach>
+-->
 
+<%
+Map<String, Object> models = (Map<String, Object>) request.getAttribute("models");
+int currentPage = (Integer) models.get("currentPage");
+int totalPages = (Integer) models.get("totalPages");
+int block = (currentPage - 1) / 10;
+
+if (currentPage > 1) {
+%>
+	<a href="<%= request.getContextPath() %>/board/?pageSize=<%= request.getParameter("pageSize") %>&page=1">처음</a>
+<%
+}
+
+// 이전 블록
+boolean prevBlock = block > 0;
+if (prevBlock) {
+%>
+	<a href="<%= request.getContextPath() %>/board/?pageSize=<%= request.getParameter("pageSize") %>&page=<%= block * 10 %>">이전</a>
+<%
+}
+
+for (int i = block * 10 + 1; i <= (block + 1) * 10 && i <= totalPages; i++) {
+	if (i != currentPage) {
+%>
+		<a href="<%= request.getContextPath() %>/board/?pageSize=<%= request.getParameter("pageSize") %>&page=<%= i %>"><%= i %></a>
+<%
+	} else {
+%>
+		<%= i %>
+<%
+	}
+}
+int totalBlocks = (totalPages - 1) / 10 + 1;
+boolean nextBlock = block < totalBlocks - 1;
+if (nextBlock) {
+%>
+		<a href="<%= request.getContextPath() %>/board/?pageSize=<%= request.getParameter("pageSize") %>&page=<%= (block + 1) * 10 + 1 %>">다음</a>
+<%
+}
+
+if (currentPage < totalPages) {
+%>
+<a href="<%= request.getContextPath() %>/board/?pageSize=<%= request.getParameter("pageSize") %>&page=<%= totalPages %>">마지막</a>
+<%
+}
+%>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
