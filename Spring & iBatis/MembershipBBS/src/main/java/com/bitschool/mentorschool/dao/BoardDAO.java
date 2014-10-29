@@ -11,7 +11,8 @@ public interface BoardDAO {
 	
 	BoardVO select(BigInteger bno);
 	
-	List<BoardVO> selectList(Integer page, Integer pageSize);
+	List<BoardVO> selectList(Integer page, Integer pageSize,
+			String searchScope, String search);
 	
 	int update(BoardVO board);
 	
@@ -19,6 +20,6 @@ public interface BoardDAO {
 	
 	int deleteByBno(BigInteger bno);
 	
-	int getTotalPages(int pageSize);
+	int getTotalPages(int pageSize, String searchScope, String search);
 	
 }

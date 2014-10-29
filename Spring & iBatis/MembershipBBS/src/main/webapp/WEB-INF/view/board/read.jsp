@@ -23,7 +23,7 @@
 	</tr>
 	<tr>
 		<td>글쓴이</td>
-		<td>${board.writer}</td>
+		<td>${board.writerName}</td>
 	</tr>
 	<tr>
 		<td>글쓴날짜</td>

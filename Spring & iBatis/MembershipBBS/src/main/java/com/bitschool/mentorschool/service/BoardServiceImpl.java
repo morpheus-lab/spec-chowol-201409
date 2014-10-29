@@ -19,10 +19,11 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO dao;
 	
 	@Override
-	public Map<String, Object> getBoardList(Integer page, Integer pageSize) throws Exception {
+	public Map<String, Object> getBoardList(Integer page, Integer pageSize,
+			String searchScope, String search) throws Exception {
 		Map<String, Object> result = new Hashtable<String, Object>();
-		result.put("boardList", dao.selectList(page, pageSize));
-		result.put("totalPages", dao.getTotalPages(pageSize));
+		result.put("boardList", dao.selectList(page, pageSize, searchScope, search));
+		result.put("totalPages", dao.getTotalPages(pageSize, searchScope, search));
 		
 		return result;
 	}

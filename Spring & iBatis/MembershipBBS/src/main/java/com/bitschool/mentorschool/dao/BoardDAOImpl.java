@@ -29,10 +29,18 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> selectList(Integer page, Integer pageSize) {
-		Map<String, Integer> params = new Hashtable<String, Integer>();
+	public List<BoardVO> selectList(Integer page, Integer pageSize,
+			String searchScope, String search) {
+		
+		Map<String, Object> params = new Hashtable<String, Object>();
 		params.put("page", page);
 		params.put("pageSize", pageSize);
+		if (searchScope != null) {
+			params.put("searchScope", searchScope);
+		}
+		if (search != null) {
+			params.put("search", search);
+		}
 		
 		return sqlSession.selectList("selectBoardList", params);
 	}
@@ -53,8 +61,17 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public int getTotalPages(int pageSize) {
-		return sqlSession.selectOne("getTotalPages", pageSize);
+	public int getTotalPages(int pageSize, String searchScope, String search) {
+		Map<String, Object> params = new Hashtable<String, Object>();
+		params.put("pageSize", pageSize);
+		if (searchScope != null) {
+			params.put("searchScope", searchScope);
+		}
+		if (search != null) {
+			params.put("search", search);
+		}
+		
+		return sqlSession.selectOne("getTotalPages", params);
 	}
 	
 }

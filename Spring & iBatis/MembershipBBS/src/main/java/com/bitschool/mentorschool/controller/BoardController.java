@@ -33,12 +33,21 @@ public class BoardController {
 	@RequestMapping(value={"/","/list"}, method=RequestMethod.GET)
 	public ModelAndView showList(
 			@RequestParam(required=false, defaultValue="1") Integer page,
-			@RequestParam(required=false, defaultValue="10") Integer pageSize
-			) {
+			@RequestParam(required=false, defaultValue="10") Integer pageSize,
+			@RequestParam(required=false) String searchScope,	// 검색 범위
+			@RequestParam(required=false) String search		// 검색어
+			) throws IOException {
+		
+		if (search != null) {
+			search = new String(search.getBytes("ISO-8859-1"), "UTF-8");
+		}
+		
+		System.out.println(searchScope);
+		System.out.println(search);
 		
 		Map<String, Object> models = null;
 		try {
-			models = service.getBoardList(page, pageSize);
+			models = service.getBoardList(page, pageSize, searchScope, search);
 			models.put("currentPage", page);
 		} catch (Exception e) {
 			e.printStackTrace();

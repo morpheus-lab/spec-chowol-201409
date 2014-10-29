@@ -31,7 +31,7 @@
 		<tr>
 			<td>${board.bno}</td>
 			<td><c:forEach begin="2" end="${board.level}">&nbsp;&nbsp;</c:forEach><c:if test="${board.level > 1}"><img src="<%= request.getContextPath() %>/images/indent_arrow.gif" border="0" /></c:if><a href="<%= request.getContextPath() %>/board/read/${board.bno}">${board.subject}</a></td>
-			<td>${board.writer}</td>
+			<td>${board.writerName}</td>
 			<td>${board.writedate}</td>
 			<td>${board.hitcount}</td>
 		</tr>
@@ -59,9 +59,18 @@ try {
 	pageSize = 10;
 }
 
+String searchScope = (String) request.getParameter("searchScope");
+String search = (String) request.getParameter("search");
+if (searchScope == null)
+	searchScope = "";
+if (search == null)
+	search = "";
+
+search = new String(search.getBytes("ISO-8859-1"), "UTF-8");
+
 if (currentPage > 1) {
 %>
-	<a href="<%= request.getContextPath() %>/board/?pageSize=<%= pageSize %>&page=1">처음</a>
+	<a href="<%= request.getContextPath() %>/board/?pageSize=<%= pageSize %>&page=1&searchScope=<%= searchScope %>&search=<%= search %>">처음</a>
 <%
 }
 
@@ -69,14 +78,14 @@ if (currentPage > 1) {
 boolean prevBlock = block > 0;
 if (prevBlock) {
 %>
-	<a href="<%= request.getContextPath() %>/board/?pageSize=<%= pageSize %>&page=<%= block * 10 %>">이전</a>
+	<a href="<%= request.getContextPath() %>/board/?pageSize=<%= pageSize %>&page=<%= block * 10 %>&searchScope=<%= searchScope %>&search=<%= search %>">이전</a>
 <%
 }
 
 for (int i = block * 10 + 1; i <= (block + 1) * 10 && i <= totalPages; i++) {
 	if (i != currentPage) {
 %>
-		<a href="<%= request.getContextPath() %>/board/?pageSize=<%= pageSize %>&page=<%= i %>"><%= i %></a>
+		<a href="<%= request.getContextPath() %>/board/?pageSize=<%= pageSize %>&page=<%= i %>&searchScope=<%= searchScope %>&search=<%= search %>"><%= i %></a>
 <%
 	} else {
 %>
@@ -88,13 +97,13 @@ int totalBlocks = (totalPages - 1) / 10 + 1;
 boolean nextBlock = block < totalBlocks - 1;
 if (nextBlock) {
 %>
-		<a href="<%= request.getContextPath() %>/board/?pageSize=<%= pageSize %>&page=<%= (block + 1) * 10 + 1 %>">다음</a>
+		<a href="<%= request.getContextPath() %>/board/?pageSize=<%= pageSize %>&page=<%= (block + 1) * 10 + 1 %>&searchScope=<%= searchScope %>&search=<%= search %>">다음</a>
 <%
 }
 
 if (currentPage < totalPages) {
 %>
-<a href="<%= request.getContextPath() %>/board/?pageSize=<%= pageSize %>&page=<%= totalPages %>">마지막</a>
+<a href="<%= request.getContextPath() %>/board/?pageSize=<%= pageSize %>&page=<%= totalPages %>&searchScope=<%= searchScope %>&search=<%= search %>">마지막</a>
 <%
 }
 %>
@@ -102,6 +111,26 @@ if (currentPage < totalPages) {
 <br/>
 
 <input type="button" value="글쓰기" onclick="location.href='<%= request.getContextPath() %>/board/write';" />
+<br/>
+
+<script type="text/javascript">
+	function search() {
+		var searchScope = document.getElementById("searchScope").value;
+		var search = document.getElementById("search").value;
+		var url = '<%= request.getContextPath() %>/board/list?searchScope=' + searchScope
+				+'&search=' + search;
+		location.href = url;
+	}
+</script>
+
+<select id="searchScope" name="searchScope">
+	<option value="subject" <%= searchScope.equals("subject") ? "selected" : "" %>>제목</option>
+	<option value="content" <%= searchScope.equals("content") ? "selected" : "" %>>내용</option>
+	<option value="writerName" <%= searchScope.equals("writerName") ? "selected" : "" %>>글쓴이</option>
+</select>
+<input type="text" id="search" name="search" value="<%= search %>" />
+<input type="button" value="검색" onclick="search()" />
+<input type="button" value="전체목록" onclick="location.href='<%= request.getContextPath() %>/board/';" />
 
 </body>
 </html>

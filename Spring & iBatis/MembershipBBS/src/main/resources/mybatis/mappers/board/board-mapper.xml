@@ -53,6 +53,21 @@
 			        FROM    board b,
 			                member m
 			        WHERE   b.writer = m.memberid(+)
+		]]>
+		<if test="searchScope != null and search != null">
+			<choose>
+				<when test="searchScope == 'subject'">
+			          AND   b.subject LIKE '%' || #{search} || '%'
+				</when>
+				<when test="searchScope == 'content'">
+			          AND   b.content LIKE '%' || #{search} || '%'
+				</when>
+				<when test="searchScope == 'writerName'">
+			          AND   m.name LIKE '%' || #{search} || '%'
+				</when>
+			</choose>
+		</if>
+		<![CDATA[
 			        START WITH b.p_bno IS NULL
 			        CONNECT BY PRIOR b.bno = b.p_bno
 			        ORDER SIBLINGS BY b.bno DESC
@@ -74,10 +89,25 @@
 	</select>
 	
 	<select id="getTotalPages"
-			parameterType="int"
+			parameterType="java.util.Map"
 			resultType="int">
 		SELECT (COUNT(*) - 1) / #{pageSize} + 1
-		FROM   board
+		FROM   board b,
+		       member m
+		WHERE  b.writer = m.memberid
+		<if test="searchScope != null and search != null">
+			<choose>
+				<when test="searchScope == 'subject'">
+			          AND   b.subject LIKE '%' || #{search} || '%'
+				</when>
+				<when test="searchScope == 'content'">
+			          AND   b.content LIKE '%' || #{search} || '%'
+				</when>
+				<when test="searchScope == 'writerName'">
+			          AND   m.name LIKE '%' || #{search} || '%'
+				</when>
+			</choose>
+		</if>
 	</select>
 	
 	<update id="updateBoard"
